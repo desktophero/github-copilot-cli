@@ -446,6 +446,12 @@ The new CLI is rapidly evolving. Check the [official repository](https://github.
 
 ---
 
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## More Information
+
 For more information, visit:
 - [Official GitHub Copilot CLI Repository](https://github.com/github/copilot-cli)
 - [GitHub Copilot CLI Documentation](https://docs.github.com/copilot/concepts/agents/about-copilot-cli)
