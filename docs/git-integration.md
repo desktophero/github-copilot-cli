@@ -7,6 +7,7 @@ Configure GitHub Copilot CLI to consistently use signed commits and follow your 
 ## Global Git Configuration
 
 ### Set Default Commit Behavior
+
 ```bash
 # Always use -sS flags for commits (sign and add Signed-off-by)
 gh copilot config set git.default_commit_flags "-sS"
@@ -19,7 +20,7 @@ gh copilot config set git.conventional_commits true
 
 # Auto-suggest signing
 gh copilot config set git.auto_sign true
-```
+```text
 
 ### Git Preferences in Global Instructions
 
@@ -37,13 +38,15 @@ Add to `~/.config/gh/copilot/instructions.md`:
 
 ### Commit Message Format
 Use conventional commit format:
-```
+```text
+
 <type>(<scope>): <description>
 
 [optional body]
 
 [optional footer(s)]
-```
+
+```text
 
 Types: feat, fix, docs, style, refactor, test, chore, ci, build, perf
 
@@ -65,11 +68,12 @@ Examples:
 - Use pull requests for all changes
 - Review code before merging
 - Keep commits atomic and focused
-```
+```text
 
 ## GPG Setup for Commit Signing
 
 ### Prerequisites Check
+
 ```bash
 # Check if GPG key exists
 gpg --list-secret-keys --keyid-format=long
@@ -77,7 +81,7 @@ gpg --list-secret-keys --keyid-format=long
 # Check git configuration
 git config --global user.signingkey
 git config --global commit.gpgsign
-```
+```text
 
 ### GPG Setup Commands
 
@@ -96,16 +100,17 @@ git config --global commit.gpgsign true
 
 # Add GPG key to GitHub account
 gpg --armor --export KEY_ID
-```
+```text
 
 ### Verification
+
 ```bash
 # Test signed commit
 git commit -sS -m "test: verify GPG signing setup"
 
 # Verify signature
 git log --show-signature -1
-```
+```text
 
 ## Copilot Integration with Git
 
@@ -121,7 +126,7 @@ gh copilot ask "Generate a commit message for my changes" --include-diff
 # Interactive commit help
 gh copilot ask "Help me commit these database schema changes" --include-diff
 # Will generate conventional format message and remind about signing
-```
+```text
 
 ### Example Commit Workflows
 
@@ -134,7 +139,7 @@ gh copilot ask "I fixed a validation bug. Create an appropriate commit message" 
 
 # Documentation updates
 gh copilot ask "I updated the README. Generate a commit message" --include README.md
-```
+```text
 
 ## Advanced Git Configuration
 
@@ -181,7 +186,7 @@ git:
   # Security
   verify_signatures: true
   require_signature_verification: true
-```
+```text
 
 ### Git Hooks Integration
 
@@ -193,7 +198,7 @@ gh copilot ask "Create a pre-commit hook that ensures commits are signed and fol
 
 # Setup commit message validation
 gh copilot ask "Create commit-msg hook to validate conventional commit format"
-```
+```text
 
 ## Practical Examples
 
@@ -211,7 +216,7 @@ gh copilot ask "I've implemented the login endpoint. Help me commit this work" -
 # Ready for review
 gh copilot ask "My feature is complete. Help me prepare it for review" --include-diff
 # Will suggest final commits, PR creation, etc.
-```
+```text
 
 ### Commit Message Generation
 
@@ -229,13 +234,14 @@ gh copilot ask "Generate commit message for new API endpoint" --include-diff
 # Documentation update
 gh copilot ask "Generate commit message" --include README.md
 # Output: "docs(readme): update installation and usage instructions"
-```
+```text
 
 ### Multi-Commit Workflows
 
 ```bash
 # Complex feature with multiple commits
-gh copilot ask "I've built a complete authentication system. Help me create a series of well-structured commits" --include src/auth/
+gh copilot ask "I've built a complete authentication system. \
+Help me create a series of well-structured commits" --include src/auth/
 
 # Expected response will suggest:
 # 1. feat(auth): add user model and database schema
@@ -244,7 +250,7 @@ gh copilot ask "I've built a complete authentication system. Help me create a se
 # 4. feat(auth): implement logout and token validation
 # 5. test(auth): add comprehensive authentication tests
 # 6. docs(auth): add authentication API documentation
-```
+```text
 
 ## Team Configuration
 
@@ -279,7 +285,7 @@ git:
       require_signed_commits: true
       require_status_checks: true
       require_up_to_date: true
-```
+```text
 
 ### Team Setup Script
 
@@ -303,7 +309,7 @@ echo "Remember to:"
 echo "1. Configure your GPG key for commit signing"
 echo "2. Add your GPG key to your GitHub account" 
 echo "3. Test with: git commit -sS -m 'test: verify setup'"
-```
+```text
 
 ## Troubleshooting
 
@@ -319,7 +325,7 @@ gh copilot ask "My commits are being rejected for format. Show me the correct co
 # Configuration not applying
 gh copilot config get git.default_commit_flags
 gh copilot config validate git
-```
+```text
 
 ### Debug Commands
 
@@ -333,7 +339,7 @@ echo "test" | gpg --clearsign
 
 # Verify Copilot git config
 gh copilot config get git --verbose
-```
+```text
 
 ### Reset Git Configuration
 
@@ -344,7 +350,7 @@ gh copilot config reset git
 # Reapply your preferences
 gh copilot config set git.default_commit_flags "-sS"
 gh copilot config set git.require_signed_commits true
-```
+```text
 
 ## Integration with Other Tools
 
@@ -356,7 +362,7 @@ pip install pre-commit
 
 # Create .pre-commit-config.yaml
 gh copilot ask "Create pre-commit configuration that ensures signed commits and conventional format"
-```
+```text
 
 ### IDE Integration
 
@@ -366,6 +372,7 @@ gh copilot ask "Create VS Code settings to always use signed commits"
 
 # Git alias setup
 gh copilot ask "Create git aliases for common signed commit operations"
-```
+```text
 
-This configuration ensures that GitHub Copilot CLI will consistently remind you about commit signing and format your commits according to your team's standards across all projects.
+This configuration ensures that GitHub Copilot CLI will consistently remind you about commit
+signing and format your commits according to your team's standards across all projects.

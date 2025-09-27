@@ -2,20 +2,23 @@
 
 ## Overview
 
-GitHub Copilot CLI tools extend the basic chat functionality with enhanced capabilities like web browsing, code execution, and file operations.
+GitHub Copilot CLI tools extend the basic chat functionality with enhanced capabilities like
+web browsing, code execution, and file operations.
 
 ## Enabling Tools
 
 ### Global Tools Configuration
+
 ```bash
 # Enable all tools
 gh copilot config set tools.enabled true
 
 # Check current tools status
 gh copilot config get tools
-```
+```text
 
 ### Individual Tool Control
+
 ```bash
 # Enable specific tools
 gh copilot config set tools.web_browsing true
@@ -24,7 +27,7 @@ gh copilot config set tools.file_operations true
 
 # Disable specific tools
 gh copilot config set tools.web_browsing false
-```
+```text
 
 ## Available Tools
 
@@ -33,11 +36,13 @@ gh copilot config set tools.web_browsing false
 **Purpose**: Access current web content and documentation
 
 **Enable**:
+
 ```bash
 gh copilot config set tools.web_browsing true
-```
+```text
 
 **Usage Examples**:
+
 ```bash
 # Get current information
 gh copilot ask "What are the latest React 18 features?" --web
@@ -47,9 +52,10 @@ gh copilot ask "Show me the latest Python asyncio best practices" --web
 
 # Compare technologies
 gh copilot ask "Compare FastAPI vs Flask for 2024" --web
-```
+```text
 
 **Best Practices**:
+
 - Use for current information that might have changed
 - Great for documentation research
 - Useful for technology comparisons
@@ -60,11 +66,13 @@ gh copilot ask "Compare FastAPI vs Flask for 2024" --web
 **Purpose**: Run and test code snippets safely
 
 **Enable**:
+
 ```bash
 gh copilot config set tools.code_execution true
-```
+```text
 
 **Usage Examples**:
+
 ```bash
 # Test a Python snippet
 gh copilot ask "Create and test a function to reverse a string" --execute
@@ -74,15 +82,17 @@ gh copilot ask "Why isn't this sorting correctly?" --code "my_list.sort(reverse=
 
 # Validate algorithms
 gh copilot ask "Test this binary search implementation" --execute --include search.py
-```
+```text
 
 **Supported Languages**:
+
 - Python
 - JavaScript/Node.js
 - Shell/Bash
 - SQL (with SQLite)
 
 **Safety Features**:
+
 - Sandboxed execution environment
 - Time limits on execution
 - No network access (by default)
@@ -93,11 +103,13 @@ gh copilot ask "Test this binary search implementation" --execute --include sear
 **Purpose**: Read, analyze, and modify files in your workspace
 
 **Enable**:
+
 ```bash
 gh copilot config set tools.file_operations true
-```
+```text
 
 **Usage Examples**:
+
 ```bash
 # Analyze code structure
 gh copilot ask "Review the architecture of my project" --include-dir src/
@@ -107,22 +119,24 @@ gh copilot ask "Add error handling to this function" --modify src/api.py
 
 # Generate new files
 gh copilot ask "Create a unit test for this module" --create-file tests/test_api.py
-```
+```text
 
 **Permissions**:
+
 ```bash
 # Set file operation permissions
 gh copilot config set tools.file_ops.read true
 gh copilot config set tools.file_ops.write true
 gh copilot config set tools.file_ops.create true
 gh copilot config set tools.file_ops.delete false  # Recommended: keep false
-```
+```text
 
 ## Advanced Tool Configuration
 
 ### Tool-Specific Settings
 
 **Web Browsing Configuration**:
+
 ```bash
 # Set search preferences
 gh copilot config set tools.web.search_engine "google"
@@ -131,9 +145,10 @@ gh copilot config set tools.web.max_results 5
 # Enable specific sources
 gh copilot config set tools.web.allow_github true
 gh copilot config set tools.web.allow_stackoverflow true
-```
+```text
 
 **Code Execution Limits**:
+
 ```bash
 # Set execution timeout (seconds)
 gh copilot config set tools.execution.timeout 30
@@ -145,9 +160,10 @@ gh copilot config set tools.execution.memory_limit 256
 gh copilot config set tools.execution.python true
 gh copilot config set tools.execution.javascript true
 gh copilot config set tools.execution.bash false
-```
+```text
 
 **File Operations Scope**:
+
 ```bash
 # Limit to specific directories
 gh copilot config set tools.files.allowed_dirs "src/,tests/,docs/"
@@ -157,11 +173,12 @@ gh copilot config set tools.files.max_file_size 100
 
 # File type restrictions
 gh copilot config set tools.files.allowed_extensions ".py,.js,.md,.json"
-```
+```text
 
 ## Using Tools Effectively
 
 ### Combining Tools
+
 ```bash
 # Research + Execute
 gh copilot ask "Find the latest pandas method for handling missing data and show me an example" --web --execute
@@ -171,7 +188,7 @@ gh copilot ask "Fix the bug in this file and test the solution" --include bug.py
 
 # Web + File + Execute
 gh copilot ask "Research async patterns, apply to my code, and test" --web --include api.py --execute
-```
+```text
 
 ### Tool Flags and Options
 
@@ -186,12 +203,14 @@ gh copilot ask "Research async patterns, apply to my code, and test" --web --inc
 ## Security and Safety
 
 ### Sandboxing
+
 - Code execution runs in isolated containers
 - No access to sensitive system files
 - Network restrictions apply
 - Automatic cleanup after execution
 
 ### Permission Model
+
 ```bash
 # View current permissions
 gh copilot config get tools --verbose
@@ -201,9 +220,10 @@ gh copilot config reset tools --safe-mode
 
 # Audit tool usage
 gh copilot audit tools --last-week
-```
+```text
 
 ### Best Practices
+
 1. **Review before execution**: Always understand what code will run
 2. **Limit file access**: Only enable write access when needed
 3. **Monitor usage**: Check tool usage regularly
@@ -215,35 +235,40 @@ gh copilot audit tools --last-week
 ### Common Issues
 
 **Tool Not Available**:
+
 ```bash
 gh copilot tools status
 gh copilot extension update
-```
+```text
 
 **Execution Failures**:
+
 ```bash
 gh copilot logs --tool execution --tail 50
 gh copilot config validate tools.execution
-```
+```text
 
 **Permission Errors**:
+
 ```bash
 gh copilot config reset tools
 gh copilot auth check --tools
-```
+```text
 
 ### Debug Mode
+
 ```bash
 # Enable verbose tool logging
 gh copilot config set debug.tools true
 
 # Run with debug output
 gh copilot ask "Debug this" --execute --debug
-```
+```text
 
 ## Tool Development
 
 ### Creating Custom Tools
+
 ```bash
 # Initialize tool template
 gh copilot tool init my-custom-tool
@@ -253,10 +278,12 @@ gh copilot tool install ./my-custom-tool
 
 # List installed tools
 gh copilot tool list --custom
-```
+```text
 
 ### Tool API
+
 Custom tools can integrate with:
+
 - File system operations
 - External APIs
 - Database connections

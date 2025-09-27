@@ -2,11 +2,13 @@
 
 ## Overview
 
-This guide shows how to configure GitHub Copilot CLI to consistently work with Python projects using pipenv, proper project structure, and development best practices.
+This guide shows how to configure GitHub Copilot CLI to consistently work with Python
+projects using pipenv, proper project structure, and development best practices.
 
 ## Global Python Configuration
 
 ### Set Python Preferences
+
 ```bash
 # Configure pipenv as default dependency manager
 gh copilot config set python.dependency_manager "pipenv"
@@ -24,7 +26,7 @@ gh copilot config set python.type_checker "mypy"
 gh copilot config set project.python.structure "src-layout"
 gh copilot config set project.python.source_directory "src"
 gh copilot config set project.python.tests_directory "tests"
-```
+```text
 
 ### Global Python Instructions
 
@@ -42,7 +44,8 @@ Add to `~/.config/gh/copilot/instructions.md`:
 
 ### Project Structure
 Use src-layout structure:
-```
+```text
+
 my_project/
 ├── Pipfile                 # Dependencies
 ├── Pipfile.lock           # Locked dependencies
@@ -59,7 +62,8 @@ my_project/
 │   └── test_main.py
 ├── docs/                  # Documentation
 └── .env.example           # Environment variables template
-```
+
+```text
 
 ### Code Quality
 - Use black for code formatting (line length: 88)
@@ -77,7 +81,7 @@ my_project/
 - Format code: `pipenv run black src/ tests/`
 - Sort imports: `pipenv run isort src/ tests/`
 - Type checking: `pipenv run mypy src/`
-```
+```text
 
 ## Automated Project Creation
 
@@ -90,8 +94,9 @@ When asked to create a Python project, Copilot will now follow your structure:
 gh copilot ask "Create a new Python web API project called 'user-service'"
 
 # Expected structure creation:
-gh copilot generate --language python --task "FastAPI project with pipenv, src layout, and proper structure" --create-dir user-service
-```
+gh copilot generate --language python --task "FastAPI project with pipenv, \
+src layout, and proper structure" --create-dir user-service
+```text
 
 ### Development Environment Setup
 
@@ -101,7 +106,7 @@ gh copilot ask "Setup development environment for this Python project" --include
 
 # Add development dependencies
 gh copilot ask "Add common development dependencies to Pipfile" --modify Pipfile
-```
+```text
 
 ## Pipenv-Specific Commands
 
@@ -129,7 +134,7 @@ pipenv shell
 pipenv run python src/main.py
 pipenv run pytest
 pipenv run black src/
-```
+```text
 
 ### Pipfile Configuration
 
@@ -161,7 +166,7 @@ lint = "flake8 src/ tests/"
 type-check = "mypy src/"
 sort-imports = "isort src/ tests/"
 dev-setup = "pre-commit install"
-```
+```text
 
 ## Integration Examples
 
@@ -182,20 +187,21 @@ gh copilot ask "Create a Python FastAPI project with the following requirements:
 # 4. Include development tools (black, flake8, etc.)
 # 5. Create proper __init__.py files
 # 6. Setup basic configuration files
-```
+```text
 
 ### Development Workflow Integration
 
 ```bash
 # Setup new feature development
-gh copilot ask "I want to add a new feature to my FastAPI project. Setup the development environment and create the basic structure for user authentication endpoints"
+gh copilot ask "I want to add a new feature to my FastAPI project. \
+Setup the development environment and create the basic structure for user authentication endpoints"
 
 # Add dependencies
 gh copilot ask "Add authentication dependencies to my Pipfile" --modify Pipfile
 
 # Create tests
 gh copilot ask "Create pytest tests for the authentication module" --create-file tests/test_auth.py --include src/my_project/auth.py
-```
+```text
 
 ## Code Generation Examples
 
@@ -212,7 +218,7 @@ gh copilot generate --language python --task "user registration endpoint with va
 # - Error handling
 # - Docstrings
 # - Pipenv-compatible structure
-```
+```text
 
 ### Example Generated Code
 
@@ -247,7 +253,7 @@ async def create_user(user_data: UserCreate) -> dict:
     """
     # Implementation here
     pass
-```
+```text
 
 ## Configuration Templates
 
@@ -301,7 +307,7 @@ project:
       - "src"
       - "tests" 
       - "docs"
-```
+```text
 
 ## Testing the Configuration
 
@@ -320,20 +326,20 @@ gh copilot ask "Setup development environment with testing and linting for my Py
 # Verify configuration
 gh copilot config get python
 gh copilot config get project.python
-```
+```text
 
 ### Expected Behaviors
 
 With proper configuration, Copilot should:
 
-1. **Always suggest pipenv** for dependency management
-2. **Create src-layout structure** for new projects
-3. **Generate Pipfile** instead of requirements.txt
-4. **Include type hints** in all generated code
-5. **Add proper docstrings** to functions
-6. **Suggest pytest** for testing
-7. **Use black formatting** standards
-8. **Follow PEP 8** guidelines
+1. __Always suggest pipenv__ for dependency management
+2. __Create src-layout structure__ for new projects
+3. __Generate Pipfile__ instead of requirements.txt
+4. __Include type hints__ in all generated code
+5. __Add proper docstrings__ to functions
+6. __Suggest pytest__ for testing
+7. __Use black formatting__ standards
+8. __Follow PEP 8__ guidelines
 
 ## Troubleshooting
 
@@ -351,7 +357,7 @@ gh copilot config set python.dependency_manager "pipenv"
 # Structure preferences ignored
 gh copilot config get project.python.structure
 gh copilot config set project.python.structure "src-layout"
-```
+```text
 
 ### Reset Python Configuration
 
@@ -362,4 +368,4 @@ gh copilot config reset python
 # Reconfigure with your preferences
 gh copilot config set python.dependency_manager "pipenv"
 gh copilot config set python.use_pipfile true
-```
+```text

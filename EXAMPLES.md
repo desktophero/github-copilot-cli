@@ -1,6 +1,7 @@
 # Practical Examples
 
-> **⚠️ MIGRATION NOTICE**: These examples have been updated for the new standalone GitHub Copilot CLI (`copilot`), not the deprecated `gh copilot` extension.
+> **⚠️ MIGRATION NOTICE**: These examples have been updated for the new standalone GitHub
+> Copilot CLI (`copilot`), not the deprecated `gh copilot` extension.
 
 ## Common Development Scenarios
 
@@ -307,4 +308,6 @@ copilot --version
 copilot --banner  # First launch with banner
 ```
 
-> **⚠️ Note**: Many advanced features from the old CLI are being reimplemented. Check the [official repository](https://github.com/github/copilot-cli) for the latest feature updates and migration guides.
+> **⚠️ Note**: Many advanced features from the old CLI are being reimplemented. Check the
+> [official repository](https://github.com/github/copilot-cli) for the latest feature updates and
+> migration guides.

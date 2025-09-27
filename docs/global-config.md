@@ -2,34 +2,40 @@
 
 ## Overview
 
-GitHub Copilot CLI can be configured with global instructions and preferences that apply across all conversations and projects. This guide shows how to set up persistent configurations, including specific development preferences like git commit signing and Python project structure.
+GitHub Copilot CLI can be configured with global instructions and preferences that apply across
+all conversations and projects. This guide shows how to set up persistent configurations,
+including specific development preferences like git commit signing and Python project structure.
 
 ## Global Configuration File
 
 ### Location
+
 The main configuration file is located at:
+
 ```bash
 ~/.config/gh/copilot/config.yml
-```
+```text
 
 ### Creating the Configuration Directory
+
 ```bash
 # Create config directory if it doesn't exist
 mkdir -p ~/.config/gh/copilot
 
 # Create the main config file
 touch ~/.config/gh/copilot/config.yml
-```
+```text
 
 ## Setting Global Instructions
 
 ### Instructions File
+
 Create a global instructions file that Copilot will reference in all conversations:
 
 ```bash
 # Create instructions file
 touch ~/.config/gh/copilot/instructions.md
-```
+```text
 
 ### Example Global Instructions
 
@@ -49,6 +55,7 @@ Edit `~/.config/gh/copilot/instructions.md`:
 - Always create and maintain Pipfile and Pipfile.lock
 - Standard project structure:
   ```
+
   project/
   ├── Pipfile
   ├── Pipfile.lock
@@ -57,7 +64,8 @@ Edit `~/.config/gh/copilot/instructions.md`:
   ├── tests/
   ├── docs/
   └── README.md
-  ```
+
+```text
 - Use pytest for testing
 - Follow PEP 8 style guidelines
 - Use black for code formatting
@@ -81,11 +89,12 @@ Edit `~/.config/gh/copilot/instructions.md`:
 - Include usage examples in docstrings
 - Document API changes in CHANGELOG.md
 - Use clear, concise commit messages
-```
+```text
 
 ## Configuration Commands
 
 ### Set Global Instructions
+
 ```bash
 # Set the path to your global instructions
 gh copilot config set instructions ~/.config/gh/copilot/instructions.md
@@ -95,9 +104,10 @@ gh copilot config set use_global_instructions true
 
 # Verify configuration
 gh copilot config get instructions
-```
+```text
 
 ### Additional Global Settings
+
 ```bash
 # Set default behavior for git operations
 gh copilot config set git.default_commit_flags "-sS"
@@ -114,11 +124,12 @@ gh copilot config set python.import_sorter "isort"
 gh copilot config set project.python.structure "src-layout"
 gh copilot config set project.python.tests_directory "tests"
 gh copilot config set project.python.docs_directory "docs"
-```
+```text
 
 ## Complete Configuration Example
 
 ### Full `~/.config/gh/copilot/config.yml`
+
 ```yaml
 # GitHub Copilot CLI Global Configuration
 
@@ -190,11 +201,12 @@ conversation:
   include_context_files: true
   verbose_explanations: false
   code_examples: true
-```
+```text
 
 ## Applying Configurations to All Conversations
 
 ### Enable Global Context
+
 ```bash
 # Make instructions apply to all new conversations
 gh copilot config set conversation.use_global_context true
@@ -204,9 +216,10 @@ gh copilot config set conversation.include_project_prefs true
 
 # Automatically apply code style preferences
 gh copilot config set conversation.enforce_style_prefs true
-```
+```text
 
 ### Test Your Configuration
+
 ```bash
 # Test that global instructions are loaded
 gh copilot ask "How should I commit my changes?"
@@ -219,11 +232,12 @@ gh copilot ask "Create a new Python project structure"
 # Test git integration
 gh copilot ask "Generate a commit message for these changes" --include-diff
 # Should generate conventionally formatted message and mention signing
-```
+```text
 
 ## Project-Specific Overrides
 
 ### Local Configuration
+
 Create `.copilot/config.yml` in project root for project-specific overrides:
 
 ```yaml
@@ -240,9 +254,10 @@ git:
 project:
   type: "web-api"
   framework: "fastapi"
-```
+```text
 
 ### Environment-Specific Instructions
+
 ```bash
 # Create environment-specific instruction files
 mkdir -p ~/.config/gh/copilot/environments
@@ -267,11 +282,12 @@ EOF
 
 # Activate environment-specific instructions
 gh copilot config set environment development
-```
+```text
 
 ## Automation Scripts
 
 ### Setup Script
+
 Create `~/.config/gh/copilot/setup.sh`:
 
 ```bash
@@ -302,17 +318,19 @@ gh copilot config set tools.code_execution true
 
 echo "Global configuration completed!"
 echo "Edit ~/.config/gh/copilot/instructions.md to customize your global instructions."
-```
+```text
 
 Make it executable and run:
+
 ```bash
 chmod +x ~/.config/gh/copilot/setup.sh
 ~/.config/gh/copilot/setup.sh
-```
+```text
 
 ## Validation and Testing
 
 ### Validate Configuration
+
 ```bash
 # Check all configuration settings
 gh copilot config list --global
@@ -322,7 +340,7 @@ gh copilot config validate instructions
 
 # Test global preferences
 gh copilot test config --all
-```
+```text
 
 ### Common Commands to Test
 
@@ -335,20 +353,22 @@ gh copilot ask "Create a new Python web API project with proper structure"
 
 # Test code generation with preferences
 gh copilot generate --language python --task "user authentication endpoint with type hints"
-```
+```text
 
 ## Sharing Configuration with Team
 
 ### Export Configuration
+
 ```bash
 # Export your configuration for sharing
 gh copilot config export --output my-copilot-config.yml
 
 # Include instructions in export
 gh copilot config export --include-instructions --output complete-config.tar.gz
-```
+```text
 
 ### Team Setup Script
+
 Create `team-setup.sh` for team members:
 
 ```bash
@@ -366,11 +386,12 @@ gh copilot config set instructions ./team-instructions.md
 
 echo "Team configuration applied!"
 echo "Run 'gh copilot config list' to verify settings."
-```
+```text
 
 ## Troubleshooting Global Configuration
 
 ### Common Issues
+
 ```bash
 # Instructions not loading
 gh copilot config get instructions
@@ -383,9 +404,10 @@ gh copilot test config --git
 # Python preferences ignored
 gh copilot config validate python
 gh copilot config reset python  # Reset and reconfigure if needed
-```
+```text
 
 ### Reset Configuration
+
 ```bash
 # Reset all configuration to defaults
 gh copilot config reset --all --confirm
@@ -396,4 +418,4 @@ gh copilot config reset python
 
 # Backup before reset
 cp ~/.config/gh/copilot/config.yml ~/.config/gh/copilot/config.yml.backup
-```
+```text

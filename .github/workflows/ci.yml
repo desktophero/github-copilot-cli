@@ -245,7 +245,7 @@ jobs:
         run: |
           # Check for conventional commit format in PR title
           PR_TITLE="${{ github.event.pull_request.title }}"
-          if [[ ! "$PR_TITLE" =~ ^(feat|fix|docs|style|refactor|test|chore|ci|build|perf)(\(.+\))?: .+ ]]; then
+          if [[ ! "$PR_TITLE" =~ ^(feat|fix|docs|style|refactor|test|chore|ci|build|perf)(\(.+\))?:\ .+ ]]; then
             echo "❌ PR title must follow conventional commit format:"
             echo "   Format: type(scope): description"
             echo "   Example: feat(auth): add user authentication"

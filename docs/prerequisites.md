@@ -1,12 +1,15 @@
 # System Requirements and Prerequisites
 
-> **⚠️ MAJOR UPDATE**: This guide has been updated for the new standalone GitHub Copilot CLI, not the deprecated `gh copilot` extension.
+> **⚠️ MAJOR UPDATE**: This guide has been updated for the new standalone GitHub Copilot CLI,
+> not the deprecated `gh copilot` extension.
 
 ## Overview
 
-The new standalone GitHub Copilot CLI has updated system requirements. This guide ensures you have the necessary components for the new `npm install -g @github/copilot` installation method.
+The new standalone GitHub Copilot CLI has updated system requirements. This guide ensures you
+have the necessary components for the new `npm install -g @github/copilot` installation method.
 
 **⚠️ Breaking Changes:**
+
 - GitHub CLI is **no longer required**
 - Node.js 22+ is now **required** (not just recommended)  
 - Installation via npm package, not GitHub CLI extension
@@ -23,6 +26,7 @@ The new standalone GitHub Copilot CLI has updated system requirements. This guid
 | **PowerShell (Windows)** | **6+** | PowerShell Core, not Windows PowerShell |
 
 ### No Longer Required
+
 - ❌ **GitHub CLI** - Not needed for standalone CLI
 - ❌ **Git** - Useful but not required for CLI installation
 
@@ -42,13 +46,14 @@ node --version
 
 # Check npm version
 npm --version
-```
+```text
 
 ### Install/Update Node.js using NVM (Recommended)
 
 #### Install NVM
 
 **macOS/Linux:**
+
 ```bash
 # Install NVM
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
@@ -60,14 +65,15 @@ source ~/.zshrc
 
 # Verify NVM installation
 nvm --version
-```
+```text
 
 **Windows (using NVM for Windows):**
+
 ```powershell
 # Download and install from: https://github.com/coreybutler/nvm-windows/releases
 # Or use winget
 winget install CoreyButler.NVMforWindows
-```
+```text
 
 #### Install Node.js 22
 
@@ -85,13 +91,14 @@ nvm alias default 22
 # Verify installation
 node --version  # Should show v22.x.x
 npm --version   # Should show 10.x.x or higher
-```
+```text
 
 ### Alternative Installation Methods
 
 #### Using Package Managers
 
 **macOS (Homebrew):**
+
 ```bash
 # Install Homebrew if not already installed
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -101,9 +108,10 @@ brew install node@22
 
 # Link the version (if needed)
 brew link --overwrite node@22
-```
+```text
 
 **Ubuntu/Debian:**
+
 ```bash
 # Install Node.js 22 from NodeSource repository
 curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
@@ -112,9 +120,10 @@ sudo apt-get install -y nodejs
 # Verify installation
 node --version
 npm --version
-```
+```text
 
 **RHEL/CentOS/Fedora:**
+
 ```bash
 # Install Node.js 22 from NodeSource repository
 curl -fsSL https://rpm.nodesource.com/setup_22.x | sudo bash -
@@ -123,7 +132,7 @@ sudo dnf install -y nodejs npm
 # Verify installation
 node --version
 npm --version
-```
+```text
 
 ## GitHub CLI Installation
 
@@ -134,24 +143,29 @@ npm --version
 gh --version
 
 # Should show version 2.40.0 or higher
-```
+```text
 
 ### Install GitHub CLI
 
 #### macOS
+
 ```bash
 # Using Homebrew (recommended)
 brew install gh
 
 # Using MacPorts
 sudo port install gh
-```
+```text
 
 #### Linux
+
 ```bash
 # Ubuntu/Debian
-curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | \
+  sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] \
+https://cli.github.com/packages stable main" | \
+sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
 sudo apt update
 sudo apt install gh
 
@@ -159,9 +173,10 @@ sudo apt install gh
 sudo dnf install 'dnf-command(config-manager)'
 sudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
 sudo dnf install gh
-```
+```text
 
 #### Windows
+
 ```powershell
 # Using winget
 winget install --id GitHub.cli
@@ -171,7 +186,7 @@ choco install gh
 
 # Using Scoop
 scoop install gh
-```
+```text
 
 ## Additional Prerequisites
 
@@ -184,7 +199,7 @@ git --version
 # Configure Git if not already done
 git config --global user.name "Your Name"
 git config --global user.email "your.email@example.com"
-```
+```text
 
 ### GPG Setup (for commit signing)
 
@@ -201,7 +216,7 @@ sudo apt install gnupg
 
 # RHEL/CentOS/Fedora
 sudo dnf install gnupg2
-```
+```text
 
 ## Verification Script
 
@@ -308,14 +323,14 @@ echo "📋 Summary"
 echo "=========="
 echo "If all checks pass with ✓, you're ready to install GitHub Copilot CLI!"
 echo "If you see ⚠ or ✗, please address those issues first."
-```
+```text
 
 Save this as `prerequisites-check.sh`, make it executable, and run:
 
 ```bash
 chmod +x prerequisites-check.sh
 ./prerequisites-check.sh
-```
+```text
 
 ## Troubleshooting Common Issues
 
@@ -324,6 +339,7 @@ chmod +x prerequisites-check.sh
 **Problem**: "GitHub Copilot CLI requires Node.js 18 or higher"
 
 **Solution**:
+
 ```bash
 # Using NVM
 nvm install 22
@@ -332,11 +348,12 @@ nvm alias default 22
 
 # Verify
 node --version  # Should show v22.x.x
-```
+```text
 
 **Problem**: "Cannot find module" errors during installation
 
 **Solution**:
+
 ```bash
 # Clear npm cache
 npm cache clean --force
@@ -346,45 +363,53 @@ npm install -g npm@latest
 
 # Try installation again
 gh extension install github/gh-copilot
-```
+```text
 
 ### GitHub CLI Issues
 
 **Problem**: "gh: command not found"
 
 **Solution**:
+
 ```bash
 # Install GitHub CLI first
 # macOS
 brew install gh
 
 # Linux (Ubuntu/Debian)
-curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | \
+  sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) \
+signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] \
+https://cli.github.com/packages stable main" | \
+sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
 sudo apt update && sudo apt install gh
-```
+```text
 
 **Problem**: "HTTP 401: Bad credentials" when installing extension
 
-**This is the most common error when running setup.sh**
+#### This is the most common error when running setup.sh
 
 **Error message you might see:**
-```
+
+```text
 ⚠ GitHub Copilot CLI extension not found. Installing...
 could not check for binary extension: HTTP 401: Bad credentials (https://api.github.com/repos/github/gh-copilot/releases/latest)
 Try authenticating with:  gh auth login
-```
+```text
 
 **Solution**:
+
 ```bash
 # Authenticate with GitHub FIRST
 gh auth login
 
 # Follow the prompts to authenticate, then re-run setup
 ./setup.sh
-```
+```text
 
 **Why this happens:**
+
 - Installing GitHub CLI extensions requires authenticated access to GitHub's API
 - The setup script tries to install the Copilot extension before checking authentication
 - GitHub returns a 401 error when trying to access extension metadata without authentication
@@ -394,6 +419,7 @@ gh auth login
 **Problem**: "Permission denied" errors during npm operations
 
 **Solution**:
+
 ```bash
 # Configure npm to use a different directory for global packages
 mkdir ~/.npm-global
@@ -404,7 +430,7 @@ export PATH=~/.npm-global/bin:$PATH
 
 # Reload your shell
 source ~/.bashrc  # or ~/.zshrc
-```
+```text
 
 ## Quick Setup Verification
 
@@ -427,6 +453,6 @@ gh copilot --help
 
 # 5. Run our automated setup (optional)
 curl -sSL https://raw.githubusercontent.com/your-username/gh-copilot-cli/main/setup.sh | bash
-```
+```text
 
 If all these commands succeed, you're ready to use GitHub Copilot CLI with the configurations in this repository!
