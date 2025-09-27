@@ -67,6 +67,8 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Dependency Review
+        # Skip for public repos as GitHub Advanced Security is required
+        if: false  # Disabled until Advanced Security is available
         uses: actions/dependency-review-action@v4
         with:
           fail-on-severity: moderate

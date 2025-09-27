@@ -84,4 +84,3 @@ Security updates will be:
 - **Backwards compatible**: When possible, to enable easy adoption
 
 Thank you for helping keep our project and users secure!
-

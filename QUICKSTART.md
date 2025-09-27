@@ -1,6 +1,7 @@
 # Quick Start Guide
 
-> **⚠️ MIGRATION NOTICE**: This guide has been updated for the new standalone GitHub Copilot CLI (`copilot`), not the deprecated `gh copilot` extension.
+> **⚠️ MIGRATION NOTICE**: This guide has been updated for the new standalone GitHub Copilot CLI
+> (`copilot`), not the deprecated `gh copilot` extension.
 
 ## Prerequisites Check
 
@@ -13,6 +14,7 @@
 | PowerShell (Windows) | 6+ | Latest | `pwsh --version` |
 
 **Breaking Changes**:
+
 - GitHub CLI is **no longer required**
 - Node.js 22 is **now required** (not just recommended)
 - Completely new installation method
@@ -82,7 +84,8 @@ copilot
 # Follow the OAuth prompts
 ```
 
-**Alternative: PAT Authentication**
+#### Alternative: PAT Authentication
+
 ```bash
 # Create PAT with "Copilot Requests" permission at:
 # https://github.com/settings/personal-access-tokens/new
@@ -99,6 +102,7 @@ copilot
 ## Essential Commands to Get Started
 
 ### 1. Installation and Setup
+
 ```bash
 # Install the new standalone CLI
 npm install -g @github/copilot
@@ -111,6 +115,7 @@ copilot
 ```
 
 ### 2. Basic Usage
+
 ```bash
 # Launch copilot (from your project directory)
 cd /path/to/your/project
@@ -124,6 +129,7 @@ copilot
 ```
 
 ### 3. Essential Configuration
+
 ```bash
 # Set preferred model (before launching)
 export COPILOT_MODEL=gpt-5
@@ -137,6 +143,7 @@ copilot --banner
 ```
 
 ### 4. Working with Different Models
+
 ```bash
 # Use default Claude Sonnet 4
 copilot
@@ -150,6 +157,7 @@ copilot
 ```
 
 ### 5. Get Help
+
 ```bash
 # General help
 copilot --help
@@ -164,12 +172,14 @@ copilot --help
 Try these steps in order:
 
 1. **Install and launch:**
+
    ```bash
    npm install -g @github/copilot
    copilot
    ```
 
 2. **Authenticate:**
+
    ```bash
    # Within copilot, run:
    /login
@@ -182,6 +192,7 @@ Try these steps in order:
    - "Explain the files in this project"
 
 4. **Test different models:**
+
    ```bash
    # Exit copilot (Ctrl+C), then try:
    COPILOT_MODEL=gpt-5 copilot
@@ -191,7 +202,8 @@ Try these steps in order:
 ## Next Steps
 
 - Read the updated [README.md](README.md) for comprehensive documentation  
-- Understand the [new architecture](https://github.com/github/copilot-cli) 
+- Understand the [new architecture](https://github.com/github/copilot-cli)
 - Check [official documentation](https://docs.github.com/copilot/concepts/agents/about-copilot-cli)
 
-> **⚠️ Note**: Many advanced features from the old `gh copilot` extension are being reimplemented in the new CLI. Check the official repository for the latest updates.
+> **⚠️ Note**: Many advanced features from the old `gh copilot` extension are being reimplemented
+> in the new CLI. Check the official repository for the latest updates.

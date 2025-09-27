@@ -145,4 +145,3 @@ COPILOT_MODEL=gpt-5 copilot  # With GPT-5
 
 The repository now serves as a comprehensive migration guide and reference for the new GitHub
 Copilot CLI, helping users transition from the deprecated extension to the modern standalone interface.
-

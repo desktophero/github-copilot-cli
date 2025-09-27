@@ -1,8 +1,10 @@
 # Documentation Index
 
-> **⚠️ MAJOR UPDATE**: This repository has been updated for the new standalone GitHub Copilot CLI (`copilot`). The old `gh copilot` extension is deprecated.
+> **⚠️ MAJOR UPDATE**: This repository has been updated for the new standalone GitHub Copilot CLI
+> (`copilot`). The old `gh copilot` extension is deprecated.
 
-Welcome to the GitHub Copilot CLI Tips repository! This collection of guides will help you master the new standalone GitHub Copilot command-line interface.
+Welcome to the GitHub Copilot CLI Tips repository! This collection of guides will help you master
+the new standalone GitHub Copilot command-line interface.
 
 ## Getting Started
 
@@ -20,6 +22,7 @@ copilot
 ```
 
 **Migration from old extension**:
+
 ```bash
 # Remove old extension
 gh extension remove github/gh-copilot
@@ -39,6 +42,7 @@ npm install -g @github/copilot
 > **⚠️ Note**: The detailed guides are being updated for the new CLI. Some information may be outdated.
 
 ### Configuration  
+
 - **[Prerequisites](docs/prerequisites.md)** - System requirements (Node.js 22+, no longer needs GitHub CLI)
 - **[Global Configuration](docs/global-config.md)** - Configuration via environment variables (old config system deprecated)
 - **[Model Configuration](docs/models.md)** - Claude Sonnet 4 (default) and GPT-5 models
@@ -46,12 +50,14 @@ npm install -g @github/copilot
 - **[Usage Information](docs/usage.md)** - Understanding premium requests and usage limits
 
 ### Development-Specific Guides  
+
 - **[Git Integration](docs/git-integration.md)** - Built-in git context detection (no manual configuration needed)
 - **[Python Project Setup](docs/python-setup.md)** - Conversational project setup guidance
 
 ## Quick Reference
 
 ### Essential Commands
+
 ```bash
 # Installation (NEW METHOD)
 npm install -g @github/copilot
@@ -73,6 +79,7 @@ export GH_TOKEN="your-pat-here"       # Set authentication
 ```
 
 ### Common Tasks
+
 | Task | Method |
 |------|---------|
 | Install CLI | `npm install -g @github/copilot` |
@@ -86,7 +93,7 @@ export GH_TOKEN="your-pat-here"       # Set authentication
 
 ## File Structure
 
-```
+```text
 .
 ├── README.md              # Main documentation (UPDATED)
 ├── QUICKSTART.md          # Quick start guide (UPDATED) 
@@ -107,17 +114,20 @@ export GH_TOKEN="your-pat-here"       # Set authentication
 ## Support
 
 For issues with the new GitHub Copilot CLI:
+
 - [Official GitHub Copilot CLI Repository](https://github.com/github/copilot-cli)  
 - [GitHub Copilot CLI Documentation](https://docs.github.com/copilot/concepts/agents/about-copilot-cli)
 - [GitHub Support](https://support.github.com/)
 
 For issues with this documentation:
+
 - Open an issue in this repository
 - Submit a pull request with improvements
 
 ## Migration Notes
 
 **Key Changes from old `gh copilot` to new `copilot`:**
+
 - ✅ **Standalone npm package** (no GitHub CLI dependency)
 - ✅ **Interactive conversational interface**
 - ✅ **Automatic project context detection**
