@@ -1,5 +1,40 @@
 # Quick Start Guide
 
+## Prerequisites Check
+
+**⚠️ Important**: GitHub Copilot CLI requires specific minimum versions. Please verify these first to avoid installation errors:
+
+| Component | Minimum | Recommended | Check Command |
+|-----------|---------|-------------|---------------|
+| Node.js | 18.x | **22.x** | `node --version` |
+| GitHub CLI | 2.40.0+ | Latest | `gh --version` |
+| Git | 2.30+ | Latest | `git --version` |
+
+### Quick Prerequisites Setup
+
+If you need to update Node.js (most common issue):
+
+```bash
+# Install NVM and Node.js 22
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+source ~/.bashrc  # or ~/.zshrc
+nvm install 22 && nvm use 22 && nvm alias default 22
+
+# Verify
+node --version  # Should show v22.x.x
+```
+
+### Prerequisites Verification Script
+
+```bash
+# Download and run verification script
+curl -sSL https://raw.githubusercontent.com/your-username/gh-copilot-cli/main/docs/prerequisites-check.sh | bash
+```
+
+For complete prerequisites guide, see **[System Requirements](docs/prerequisites.md)**.
+
+---
+
 ## Automated Setup (Recommended)
 
 Use the provided setup script to configure everything automatically:

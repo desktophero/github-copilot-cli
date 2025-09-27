@@ -28,6 +28,7 @@ This configures:
 ## Detailed Guides
 
 ### Configuration
+- **[Prerequisites](docs/prerequisites.md)** - System requirements, Node.js 22, GitHub CLI setup
 - **[Global Configuration](docs/global-config.md)** - Setting up persistent global instructions and preferences
 - **[Model Configuration](docs/models.md)** - Setting and changing default models, context windows  
 - **[Tools and Extensions](docs/tools.md)** - Enabling tools like web browsing, code execution

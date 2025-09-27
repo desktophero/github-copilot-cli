@@ -33,12 +33,64 @@ log_error() {
 # Check prerequisites
 echo "Checking prerequisites..."
 
+# Check Node.js version
+if command -v node &> /dev/null; then
+    NODE_VERSION=$(node --version | sed 's/v//' | cut -d'.' -f1)
+    if [ "$NODE_VERSION" -ge 18 ]; then
+        log_info "Node.js version $(node --version) meets minimum requirements"
+        if [ "$NODE_VERSION" -lt 22 ]; then
+            log_warn "Node.js $(node --version) detected. Version 22+ recommended for best performance"
+            log_warn "Consider upgrading with: nvm install 22 && nvm use 22"
+        fi
+    else
+        log_error "Node.js version $(node --version) is too old. Minimum required: 18.x, Recommended: 22.x"
+        echo "To upgrade Node.js:"
+        echo "  1. Install NVM: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash"
+        echo "  2. Reload shell: source ~/.bashrc"
+        echo "  3. Install Node 22: nvm install 22 && nvm use 22"
+        exit 1
+    fi
+else
+    log_error "Node.js is not installed. Please install Node.js 22 first:"
+    echo "  https://nodejs.org/ or use NVM for easier version management"
+    exit 1
+fi
+
+# Check npm version
+if command -v npm &> /dev/null; then
+    NPM_VERSION=$(npm --version | cut -d'.' -f1)
+    if [ "$NPM_VERSION" -ge 9 ]; then
+        log_info "npm version $(npm --version) is compatible"
+    else
+        log_warn "npm version $(npm --version) is old. Consider updating: npm install -g npm@latest"
+    fi
+else
+    log_error "npm is not installed (should come with Node.js)"
+    exit 1
+fi
+
 # Check if gh CLI is installed
 if ! command -v gh &> /dev/null; then
     log_error "GitHub CLI (gh) is not installed. Please install it first:"
-    echo "  https://cli.github.com/"
+    echo "  macOS: brew install gh"
+    echo "  Ubuntu: sudo apt install gh (after adding GitHub CLI repository)"
+    echo "  More info: https://cli.github.com/"
     exit 1
 fi
+
+# Check GitHub CLI version
+GH_VERSION=$(gh --version | head -n1 | grep -oE '[0-9]+\.[0-9]+' | head -n1)
+REQUIRED_GH_VERSION="2.40"
+if [[ $(echo "$GH_VERSION >= $REQUIRED_GH_VERSION" | bc -l 2>/dev/null) != "1" ]]; then
+    if [[ "$GH_VERSION" < "$REQUIRED_GH_VERSION" ]]; then
+        log_error "GitHub CLI version $GH_VERSION is too old. Minimum required: $REQUIRED_GH_VERSION"
+        echo "Please update GitHub CLI:"
+        echo "  macOS: brew upgrade gh"
+        echo "  Ubuntu: sudo apt update && sudo apt upgrade gh"
+        exit 1
+    fi
+fi
+log_info "GitHub CLI version $GH_VERSION meets requirements"
 
 # Check if gh copilot extension is installed
 if ! gh extension list | grep -q "github/gh-copilot"; then

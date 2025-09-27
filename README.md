@@ -15,6 +15,68 @@ A comprehensive guide to using GitHub Copilot CLI effectively.
 
 ## Installation
 
+### System Requirements
+
+**Important**: GitHub Copilot CLI requires specific minimum versions. Please check these before proceeding:
+
+| Component | Minimum Version | Recommended |
+|-----------|----------------|-------------|
+| Node.js | 18.x | **22.x** |
+| GitHub CLI | 2.40.0+ | Latest |
+| Git | 2.30+ | Latest |
+
+**Common Issue**: If you encounter installation errors, you likely need to update Node.js to version 22.
+
+### Prerequisites Setup
+
+#### 1. Install/Update Node.js to Version 22
+
+**Using NVM (Recommended)**:
+```bash
+# Install NVM if not already installed
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+source ~/.bashrc  # or ~/.zshrc
+
+# Install and use Node.js 22
+nvm install 22
+nvm use 22
+nvm alias default 22
+
+# Verify
+node --version  # Should show v22.x.x
+```
+
+**Alternative methods**:
+```bash
+# macOS (Homebrew)
+brew install node@22
+
+# Ubuntu/Debian
+curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+sudo apt-get install -y nodejs
+```
+
+#### 2. Install GitHub CLI (if not already installed)
+
+```bash
+# macOS
+brew install gh
+
+# Ubuntu/Debian  
+curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+sudo apt update && sudo apt install gh
+```
+
+#### 3. Verify Prerequisites
+
+```bash
+# Download and run our verification script
+curl -sSL https://raw.githubusercontent.com/your-username/gh-copilot-cli/main/docs/prerequisites-check.sh | bash
+```
+
+For detailed prerequisites information, see **[System Requirements Guide](docs/prerequisites.md)**.
+
 ### Automated Setup (Recommended)
 Use the provided setup script to configure everything automatically:
 
