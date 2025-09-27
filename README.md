@@ -389,6 +389,49 @@ alias cop5="COPILOT_MODEL=gpt-5 copilot"
 
 ### Common Issues
 
+#### Model Call Failures and Content Filtering
+
+**Error: "Model call failed: Output blocked by content filtering policy"**
+
+This error occurs when the AI model's content filtering system blocks a request or response. This is expected behavior and not a bug.
+
+**Common causes:**
+- Content appears to violate content policies (even if unintentional)
+- Code or text triggers false positives in safety filters
+- Large code blocks that contain patterns flagged by filters
+- Discussions about security, vulnerabilities, or sensitive topics
+
+**Solutions:**
+```bash
+# 1. Rephrase your request
+# Instead of: "Show me how to exploit this vulnerability"
+# Try: "Help me understand and fix this security issue"
+
+# 2. Break down large requests
+# Instead of sending entire files, send smaller sections
+
+# 3. Use more specific, technical language
+# Instead of: "hack this code"
+# Try: "debug this implementation"
+
+# 4. Try a different model if available
+copilot --model gpt-3.5  # May have different filtering
+```
+
+**What to expect:**
+- ⚠️ Content filtering is **normal behavior**, not an error
+- 🔄 Rephrasing usually resolves the issue
+- 📝 More specific, professional language reduces false positives
+- 🛡️ Filters protect against generating harmful content
+
+**When this happens:**
+1. **Don't retry the exact same request** - it will likely fail again
+2. **Rephrase using professional/technical language**
+3. **Break large requests into smaller parts**
+4. **Focus on the specific technical problem you're solving**
+
+### Common Issues
+
 #### Installation Problems
 ```bash
 # Update Node.js to version 22

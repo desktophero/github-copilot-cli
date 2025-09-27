@@ -290,6 +290,135 @@ gh copilot webhook config --threshold-exceeded --daily-limit
 
 ## Troubleshooting Usage Issues
 
+### Model Call Failures and Content Filtering
+
+#### Understanding Content Filtering Errors
+
+**Error Message:**
+```
+× Model call failed: {"message":"Output blocked by content filtering policy","code":"invalid_request_body"}
+```
+
+This is **normal behavior**, not a system error. AI models have built-in safety filters to prevent generating harmful content.
+
+#### Why Content Filtering Occurs
+
+**Common Triggers:**
+- Security-related discussions (even legitimate ones)
+- Code containing certain patterns or keywords
+- Large code blocks that trigger false positives
+- Requests that could be misinterpreted as malicious
+- Content involving sensitive topics
+
+**Examples that might trigger filters:**
+```bash
+# These might get blocked:
+gh copilot ask "How to bypass authentication in this code"
+gh copilot ask "Show me vulnerabilities in this system"
+gh copilot ask "Help me hack this script"
+
+# These are more likely to work:
+gh copilot ask "Help me fix authentication issues in this code"
+gh copilot ask "Review this code for security best practices"
+gh copilot ask "Debug this script's logic"
+```
+
+#### Strategies to Avoid Content Filtering
+
+**1. Use Professional Language:**
+```bash
+# Instead of: "exploit", "hack", "break"
+# Use: "debug", "analyze", "optimize", "review"
+
+# Instead of: "How to crack this?"
+# Use: "How to troubleshoot this issue?"
+```
+
+**2. Be Specific and Technical:**
+```bash
+# Vague (may trigger filters):
+gh copilot ask "Make this code malicious"
+
+# Specific (less likely to trigger):
+gh copilot ask "Add error handling to this function"
+```
+
+**3. Break Down Large Requests:**
+```bash
+# Instead of sending entire files:
+gh copilot ask "Review this entire codebase" --include-dir src/
+
+# Send smaller sections:
+gh copilot ask "Review this authentication module" --include src/auth.py
+```
+
+**4. Context Matters:**
+```bash
+# Provide clear context:
+gh copilot ask "I'm debugging a security issue in my application. Help me identify why authentication is failing" --include auth.py
+```
+
+#### Recovery Strategies
+
+**When You Get Blocked:**
+
+1. **Rephrase the Question:**
+   ```bash
+   # Original (blocked): "How to exploit this vulnerability?"
+   # Rephrased: "How to fix this security vulnerability?"
+   ```
+
+2. **Use Different Terminology:**
+   ```bash
+   # Blocked terms: exploit, hack, crack, bypass
+   # Better terms: debug, analyze, fix, resolve, optimize
+   ```
+
+3. **Add Professional Context:**
+   ```bash
+   gh copilot ask "As a developer working on security improvements, help me understand this code pattern" --include code.py
+   ```
+
+4. **Break Into Smaller Questions:**
+   ```bash
+   # Instead of one large security review:
+   gh copilot ask "Review the input validation in this function"
+   gh copilot ask "Check error handling in this module"
+   gh copilot ask "Suggest improvements for this authentication flow"
+   ```
+
+5. **Try Different Models:**
+   ```bash
+   # Some models may have different filtering sensitivity
+   gh copilot ask "Your question" --model gpt-3.5-turbo
+   ```
+
+#### Best Practices for Avoiding Blocks
+
+**✅ Do:**
+- Use professional, technical language
+- Provide clear context about your legitimate use case
+- Be specific about what you're trying to accomplish
+- Frame requests as learning or improvement opportunities
+- Use industry-standard terminology
+
+**❌ Avoid:**
+- Ambiguous language that could be misinterpreted
+- Terms associated with malicious activities
+- Requesting harmful or unethical content
+- Large, unfocused requests without context
+- Repetitive attempts with the same blocked phrasing
+
+#### When Content Filtering is Helpful
+
+Content filtering protects against:
+- Generating actually harmful code
+- Providing information that could be misused
+- Creating content that violates terms of service
+- Accidentally generating inappropriate material
+
+**Remember:** Content filtering is a feature, not a bug. It helps ensure responsible AI usage.
+
 ### Common Problems
 
 **Unexpected High Usage**:

@@ -289,6 +289,30 @@ docs/
 
 ## Getting Help
 
+### Content Filtering and AI Model Issues
+
+When working on documentation, you may encounter content filtering from AI models:
+
+**Common Error:**
+```
+× Model call failed: {"message":"Output blocked by content filtering policy","code":"invalid_request_body"}
+```
+
+**This is normal behavior** when discussing security, vulnerabilities, or certain technical topics.
+
+**Solutions for Contributors:**
+- Use professional, technical language
+- Focus on educational and defensive security practices
+- Frame security discussions as "best practices" or "hardening"
+- Break large technical discussions into smaller parts
+- Provide clear context about legitimate educational purposes
+
+**When documenting security features:**
+- ✅ "Configure security scanning to detect vulnerabilities"
+- ✅ "Implement input validation to prevent injection attacks"
+- ✅ "Review code for security best practices"
+- ❌ Avoid language that could be misinterpreted as malicious
+
 ### Where to Ask Questions
 
 - **GitHub Issues** - For bugs or feature requests
