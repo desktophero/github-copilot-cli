@@ -28,12 +28,14 @@ This project adheres to a code of conduct. By participating, you are expected to
 
 1. Fork the repository on GitHub
 2. Clone your fork locally:
+
    ```bash
    git clone https://github.com/YOUR_USERNAME/gh-copilot-cli.git
    cd gh-copilot-cli
    ```
 
 3. Add the upstream remote:
+
    ```bash
    git remote add upstream https://github.com/desktophero/github-copilot-cli.git
    ```
@@ -76,12 +78,14 @@ git checkout -b fix/issue-description
 ### Before Creating a PR
 
 1. **Sync with upstream:**
+
    ```bash
    git fetch upstream
    git rebase upstream/main
    ```
 
 2. **Run quality checks:**
+
    ```bash
    # Spell check (if you have cspell installed)
    npm install -g cspell
@@ -103,6 +107,7 @@ git checkout -b fix/issue-description
 ### Creating the Pull Request
 
 1. **Push your branch:**
+
    ```bash
    git push origin feature/your-feature-name
    ```
@@ -121,6 +126,7 @@ git checkout -b fix/issue-description
 ### PR Requirements
 
 ✅ **Required for all PRs:**
+
 - [ ] Clear description of changes
 - [ ] Conventional commit title format
 - [ ] All CI checks passing
@@ -128,12 +134,14 @@ git checkout -b fix/issue-description
 - [ ] Self-review completed
 
 ✅ **Required for documentation changes:**
+
 - [ ] Spell check passes
 - [ ] Markdown lint passes
 - [ ] Links are valid
 - [ ] Examples are tested
 
 ✅ **Required for workflow/config changes:**
+
 - [ ] YAML syntax is valid
 - [ ] Changes tested in fork
 - [ ] Security implications considered
@@ -167,7 +175,7 @@ git checkout -b fix/issue-description
 
 Follow [conventional commit format](https://www.conventionalcommits.org/):
 
-```
+```text
 <type>(<scope>): <description>
 
 [optional body]
@@ -176,6 +184,7 @@ Follow [conventional commit format](https://www.conventionalcommits.org/):
 ```
 
 **Types:**
+
 - `feat` - New features
 - `fix` - Bug fixes
 - `docs` - Documentation changes
@@ -186,6 +195,7 @@ Follow [conventional commit format](https://www.conventionalcommits.org/):
 - `ci` - CI/CD changes
 
 **Examples:**
+
 ```bash
 feat(auth): add OAuth configuration guide
 fix(setup): resolve Node.js version check issue
@@ -198,16 +208,19 @@ chore(deps): update workflow action versions
 ### Documentation Testing
 
 1. **Spell Check:**
+
    ```bash
    cspell "**/*.md" --config .cspell.json
    ```
 
 2. **Markdown Lint:**
+
    ```bash
    markdownlint "**/*.md" --config .markdownlint.json
    ```
 
 3. **Link Validation:**
+
    ```bash
    # Manual verification of internal links
    grep -r '\[.*\](\..*\.md)' . --include="*.md"
@@ -216,6 +229,7 @@ chore(deps): update workflow action versions
 ### Script Testing
 
 1. **Syntax Check:**
+
    ```bash
    find . -name "*.sh" -exec bash -n {} \;
    ```
@@ -228,6 +242,7 @@ chore(deps): update workflow action versions
 ### Workflow Testing
 
 1. **YAML Validation:**
+
    ```bash
    python -c "import yaml; yaml.safe_load(open('.github/workflows/ci.yml'))"
    ```
@@ -237,7 +252,7 @@ chore(deps): update workflow action versions
    - Verify security scans work correctly
    - Ensure all jobs complete successfully
 
-## Documentation
+## Contributor Documentation
 
 ### What Needs Documentation
 
@@ -249,7 +264,7 @@ chore(deps): update workflow action versions
 
 ### Documentation Structure
 
-```
+```text
 docs/
 ├── usage.md          # How to use the tools
 ├── models.md         # Model configuration
@@ -294,13 +309,15 @@ docs/
 When working on documentation, you may encounter content filtering from AI models:
 
 **Common Error:**
-```
+
+```text
 × Model call failed: {"message":"Output blocked by content filtering policy","code":"invalid_request_body"}
 ```
 
 **This is normal behavior** when discussing security, vulnerabilities, or certain technical topics.
 
 **Solutions for Contributors:**
+
 - Use professional, technical language
 - Focus on educational and defensive security practices
 - Frame security discussions as "best practices" or "hardening"
@@ -308,6 +325,7 @@ When working on documentation, you may encounter content filtering from AI model
 - Provide clear context about legitimate educational purposes
 
 **When documenting security features:**
+
 - ✅ "Configure security scanning to detect vulnerabilities"
 - ✅ "Implement input validation to prevent injection attacks"
 - ✅ "Review code for security best practices"
