@@ -6,6 +6,7 @@ A comprehensive guide to using GitHub Copilot CLI effectively.
 
 - [Installation](#installation)
 - [Basic Configuration](#basic-configuration)
+- [Global Configuration](#global-configuration)
 - [Model Management](#model-management)
 - [Tools and Extensions](#tools-and-extensions)
 - [Usage Information](#usage-information)
@@ -13,6 +14,21 @@ A comprehensive guide to using GitHub Copilot CLI effectively.
 - [Tips and Tricks](#tips-and-tricks)
 
 ## Installation
+
+### Automated Setup (Recommended)
+Use the provided setup script to configure everything automatically:
+
+```bash
+# Download and run setup script
+curl -sSL https://raw.githubusercontent.com/your-username/gh-copilot-cli/main/setup.sh | bash
+
+# Or clone and run locally  
+git clone https://github.com/your-username/gh-copilot-cli.git
+cd gh-copilot-cli
+./setup.sh
+```
+
+### Manual Installation
 
 First, install the GitHub Copilot CLI extension:
 
@@ -35,6 +51,53 @@ Configure your basic settings:
 ```bash
 gh copilot config
 ```
+
+## Global Configuration
+
+### Setting Global Instructions
+Create persistent instructions that apply to all conversations:
+
+```bash
+# Create config directory
+mkdir -p ~/.config/gh/copilot
+
+# Set global instructions
+gh copilot config set instructions ~/.config/gh/copilot/instructions.md
+gh copilot config set use_global_instructions true
+```
+
+### Example Global Configuration
+```yaml
+# ~/.config/gh/copilot/config.yml
+default_model: gpt-4
+tools:
+  enabled: true
+
+# Git preferences
+git:
+  default_commit_flags: "-sS"
+  require_signed_commits: true
+  conventional_commits: true
+
+# Python preferences  
+python:
+  dependency_manager: "pipenv"
+  use_pipfile: true
+  test_framework: "pytest"
+  formatter: "black"
+
+# Project structure
+project:
+  python:
+    structure: "src-layout"
+    source_directory: "src"
+    tests_directory: "tests"
+```
+
+For detailed configuration instructions, see:
+- **[Global Configuration Guide](docs/global-config.md)** - Complete setup instructions
+- **[Git Integration](docs/git-integration.md)** - Commit signing and workflow preferences
+- **[Python Project Setup](docs/python-setup.md)** - Pipenv and project structure preferences
 
 ## Model Management
 

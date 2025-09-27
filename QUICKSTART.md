@@ -1,5 +1,28 @@
 # Quick Start Guide
 
+## Automated Setup (Recommended)
+
+Use the provided setup script to configure everything automatically:
+
+```bash
+# Download and run setup script
+curl -sSL https://raw.githubusercontent.com/your-username/gh-copilot-cli/main/setup.sh | bash
+
+# Or clone and run locally
+git clone https://github.com/your-username/gh-copilot-cli.git
+cd gh-copilot-cli
+./setup.sh
+```
+
+The script automatically configures:
+- Global instructions for development practices
+- Git commit signing with `-sS` flags  
+- Python development with pipenv and src-layout
+- Conventional commit format
+- Tools and best practices
+
+## Manual Setup
+
 ## Essential Commands to Get Started
 
 ### 1. Installation and Setup
