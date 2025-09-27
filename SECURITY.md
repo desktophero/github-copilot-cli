@@ -8,7 +8,8 @@
 
 ## Reporting a Vulnerability
 
-We take the security of our project seriously. If you believe you have found a security vulnerability, please report it to us as described below.
+We take the security of our project seriously. If you believe you have found a security
+vulnerability, please report it to us as described below.
 
 ### How to Report
 
@@ -83,3 +84,4 @@ Security updates will be:
 - **Backwards compatible**: When possible, to enable easy adoption
 
 Thank you for helping keep our project and users secure!
+

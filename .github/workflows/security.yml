@@ -71,7 +71,6 @@ jobs:
         with:
           fail-on-severity: moderate
           allow-ghsas: ""
-          allow-dependencies-licenses: "MIT, Apache-2.0, BSD-2-Clause, BSD-3-Clause, ISC"
 
   secret-scan:
     name: Secret Scanning

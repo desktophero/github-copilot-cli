@@ -1,8 +1,10 @@
 # GitHub Copilot CLI Tips
 
-> **⚠️ DEPRECATION NOTICE**: The `gh copilot` CLI extension has been deprecated. This repository now covers the new standalone GitHub Copilot CLI.
-> 
-> **Migration Info**: The new CLI is installed via `npm install -g @github/copilot` and invoked with `copilot` (not `gh copilot`).
+> **⚠️ DEPRECATION NOTICE**: The `gh copilot` CLI extension has been deprecated. This repository now
+> covers the new standalone GitHub Copilot CLI.
+>
+> **Migration Info**: The new CLI is installed via `npm install -g @github/copilot` and invoked with
+> `copilot` (not `gh copilot`).
 
 A comprehensive guide to using GitHub Copilot CLI effectively.
 
@@ -29,7 +31,8 @@ A comprehensive guide to using GitHub Copilot CLI effectively.
 | npm | 10.x | **Latest** |
 | PowerShell (Windows) | 6+ | **Latest** |
 
-**Breaking Changes**: 
+**Breaking Changes**:
+
 - GitHub CLI is **no longer required** - the new CLI is standalone
 - Node.js 22 is now **required** (not just recommended)
 - Windows users need PowerShell 6+ (not Windows PowerShell)
@@ -41,6 +44,7 @@ A comprehensive guide to using GitHub Copilot CLI effectively.
 #### 1. Install/Update Node.js to Version 22
 
 **Using NVM (Recommended)**:
+
 ```bash
 # Install NVM if not already installed
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
@@ -56,6 +60,7 @@ node --version  # Should show v22.x.x
 ```
 
 **Alternative methods**:
+
 ```bash
 # macOS (Homebrew)
 brew install node@22
@@ -68,6 +73,7 @@ sudo apt-get install -y nodejs
 #### 2. Install the New Standalone CLI
 
 **New Installation Method**:
+
 ```bash
 # Install the standalone GitHub Copilot CLI
 npm install -g @github/copilot
@@ -77,6 +83,7 @@ copilot --version
 ```
 
 **Migration from old extension**:
+
 ```bash
 # Remove the old extension (if installed)
 gh extension remove github/gh-copilot
@@ -96,9 +103,11 @@ For detailed prerequisites information, see **[System Requirements Guide](docs/p
 
 ### Automated Setup (Updated for New CLI)
 
-> **⚠️ Note**: The automated setup script is being updated to support the new standalone CLI. Manual installation is recommended for now.
+> **⚠️ Note**: The automated setup script is being updated to support the new standalone CLI.
+> Manual installation is recommended for now.
 
 **Manual Installation Steps**:
+
 ```bash
 # 1. Install the new standalone CLI
 npm install -g @github/copilot
@@ -123,12 +132,14 @@ copilot
 **Authentication Options**:
 
 1. **OAuth Flow** (Recommended):
+
    ```bash
    copilot
    # Enter /login and follow the prompts
    ```
 
 2. **Personal Access Token**:
+
    ```bash
    # Create a PAT with "Copilot Requests" permission at:
    # https://github.com/settings/personal-access-tokens/new
@@ -145,6 +156,7 @@ copilot
 ## Basic Configuration
 
 ### Authentication
+
 The new standalone CLI handles authentication internally:
 
 ```bash
@@ -155,6 +167,7 @@ copilot
 ```
 
 ### Initial Setup
+
 The new CLI uses an interactive approach:
 
 ```bash
@@ -164,7 +177,8 @@ copilot
 
 ## Global Configuration
 
-> **⚠️ Note**: The new standalone CLI uses a different configuration system. Global configuration is managed through environment variables and the interactive interface.
+> **⚠️ Note**: The new standalone CLI uses a different configuration system. Global configuration
+> is managed through environment variables and the interactive interface.
 
 ### Setting Model Preferences
 
@@ -177,6 +191,7 @@ COPILOT_MODEL=gpt-5 copilot
 ```
 
 ### Authentication Configuration
+
 ```bash
 # Set up authentication token
 export GH_TOKEN="your-personal-access-token"
@@ -184,7 +199,8 @@ export GH_TOKEN="your-personal-access-token"
 export GITHUB_TOKEN="your-personal-access-token"
 ```
 
-### Example Configuration
+### Basic Configuration Example
+
 ```bash
 # Environment variables for the new CLI
 export COPILOT_MODEL=claude-sonnet-4  # Default model
@@ -201,7 +217,8 @@ COPILOT_MODEL=gpt-5 copilot  # Launch with GPT-5
 
 #### Installation Issues
 
-**Error: "Cannot find module '@github/copilot'"**
+##### Error: "Cannot find module '@github/copilot'"
+
 ```bash
 # Solution: Install using npm
 npm install -g @github/copilot
@@ -210,7 +227,8 @@ npm install -g @github/copilot
 copilot --version
 ```
 
-**Error: Node.js version issues**
+##### Error: Node.js version issues
+
 ```bash
 # The new CLI requires Node.js 22+
 nvm install 22
@@ -220,15 +238,18 @@ npm install -g @github/copilot
 
 #### Authentication Problems
 
-**Error: "Authentication failed"**
+##### Error: "Authentication failed"
 
 **Solution:**
+
 1. Create a fine-grained PAT with "Copilot Requests" permission
 2. Set environment variable:
+
    ```bash
    export GH_TOKEN="your-pat-here"
    copilot
    ```
+
 3. Or use the `/login` command in copilot for OAuth flow
 
 **Why this happens:** The new standalone CLI requires direct authentication, not through GitHub CLI.
@@ -238,6 +259,7 @@ For more troubleshooting information, see **[System Requirements Guide](docs/pre
 ---
 
 For detailed configuration instructions, see:
+
 - **[Global Configuration Guide](docs/global-config.md)** - Complete setup instructions
 - **[Git Integration](docs/git-integration.md)** - Commit signing and workflow preferences
 - **[Python Project Setup](docs/python-setup.md)** - Pipenv and project structure preferences
@@ -245,11 +267,14 @@ For detailed configuration instructions, see:
 ## Model Management
 
 ### Available Models
+
 The new CLI supports these models:
+
 - **Claude Sonnet 4** (default)
 - **GPT-5** (via environment variable)
 
 ### Set Default Model
+
 ```bash
 # Use environment variable
 export COPILOT_MODEL=gpt-5
@@ -263,18 +288,22 @@ copilot
 ```
 
 ### View Current Model
+
 The current model is displayed in the copilot interface or set by environment variable.
 
 ## Tools and Extensions
 
 ### Built-in Capabilities
+
 The new CLI has built-in tools and GitHub integration:
+
 - **Terminal-native development**
 - **GitHub integration** (repos, issues, PRs)
 - **Code execution and file operations**
 - **MCP-powered extensibility**
 
 ### GitHub Integration
+
 ```bash
 # Launch in your project directory
 cd /path/to/your/project
@@ -286,9 +315,11 @@ copilot
 ## Usage Information
 
 ### Understanding Premium Requests
+
 Each prompt to GitHub Copilot CLI consumes one premium request from your monthly quota.
 
 ### Usage Commands
+
 ```bash
 # Check basic information - run within copilot
 /help          # Show available commands
@@ -302,6 +333,7 @@ copilot --version
 ## Common Commands
 
 ### Starting the CLI
+
 ```bash
 # Basic launch
 copilot
@@ -314,6 +346,7 @@ COPILOT_MODEL=gpt-5 copilot
 ```
 
 ### Within the Copilot Interface
+
 ```bash
 /login         # Authenticate with GitHub
 /help          # Show available commands
@@ -321,35 +354,42 @@ COPILOT_MODEL=gpt-5 copilot
 ```
 
 ### Working with Code
+
 The new CLI uses natural language within the interactive session:
+
 - "Help me debug this error"
-- "Review my staged changes" 
+- "Review my staged changes"
 - "Create a Python REST API"
 - "Explain this codebase"
 
 ## Tips and Tricks
 
 ### 1. Use Context Effectively
+
 - Launch copilot from your project directory for automatic context
 - The CLI can access your GitHub repositories, issues, and pull requests
 - Use clear, specific natural language prompts
 
 ### 2. Model Selection Tips
+
 - **Claude Sonnet 4** (default): Excellent for most development tasks
 - **GPT-5**: Available via `COPILOT_MODEL=gpt-5` environment variable
 - Models are set at launch time
 
 ### 3. GitHub Integration Best Practices
+
 - Launch from your project root directory
 - The CLI automatically detects your GitHub context
 - Ask about issues, PRs, and repository information naturally
 
 ### 4. Managing Conversations
+
 - Each session is independent - no persistent conversation history
 - Use descriptive prompts to provide context in each request
 - Be mindful of premium request quota
 
 ### 5. Productivity Shortcuts
+
 ```bash
 # Create aliases for common usage
 alias cop="copilot"
@@ -361,7 +401,9 @@ export GH_TOKEN="your-pat-here"        # Set authentication
 ```
 
 ### 6. Integration with Development Workflow
+
 The new CLI integrates directly with your development environment:
+
 - Automatic detection of project context
 - Access to GitHub repositories and metadata
 - Direct terminal integration without context switching
@@ -369,12 +411,14 @@ The new CLI integrates directly with your development environment:
 ## Configuration Reference
 
 ### Environment Variables
+
 The new CLI uses environment variables for configuration:
 
 - `COPILOT_MODEL`: Set the model (claude-sonnet-4 or gpt-5)
 - `GH_TOKEN` or `GITHUB_TOKEN`: Personal access token for authentication
 
 ### Example Configuration
+
 ```bash
 # In your shell profile (.bashrc, .zshrc, etc.)
 export COPILOT_MODEL=claude-sonnet-4
@@ -385,23 +429,26 @@ alias cop="copilot"
 alias cop5="COPILOT_MODEL=gpt-5 copilot"
 ```
 
-## Troubleshooting
+## Content Filtering and Model Issues
 
-### Common Issues
+### Content Filtering Issues
 
 #### Model Call Failures and Content Filtering
 
-**Error: "Model call failed: Output blocked by content filtering policy"**
+#### Model Call Failed: Content Filtering Error
 
-This error occurs when the AI model's content filtering system blocks a request or response. This is expected behavior and not a bug.
+This error occurs when the AI model's content filtering system blocks a request or response.
+This is expected behavior and not a bug.
 
 **Common causes:**
+
 - Content appears to violate content policies (even if unintentional)
 - Code or text triggers false positives in safety filters
 - Large code blocks that contain patterns flagged by filters
 - Discussions about security, vulnerabilities, or sensitive topics
 
 **Solutions:**
+
 ```bash
 # 1. Rephrase your request
 # Instead of: "Show me how to exploit this vulnerability"
@@ -419,20 +466,23 @@ copilot --model gpt-3.5  # May have different filtering
 ```
 
 **What to expect:**
+
 - ⚠️ Content filtering is **normal behavior**, not an error
 - 🔄 Rephrasing usually resolves the issue
 - 📝 More specific, professional language reduces false positives
 - 🛡️ Filters protect against generating harmful content
 
 **When this happens:**
+
 1. **Don't retry the exact same request** - it will likely fail again
 2. **Rephrase using professional/technical language**
 3. **Break large requests into smaller parts**
 4. **Focus on the specific technical problem you're solving**
 
-### Common Issues
+### General Troubleshooting
 
 #### Installation Problems
+
 ```bash
 # Update Node.js to version 22
 nvm install 22 && nvm use 22
@@ -445,6 +495,7 @@ copilot --version
 ```
 
 #### Authentication Issues
+
 ```bash
 # Check your PAT has "Copilot Requests" permission
 # Set environment variable
@@ -456,6 +507,7 @@ copilot
 ```
 
 #### Model Access Issues
+
 ```bash
 # Verify model setting
 echo $COPILOT_MODEL
@@ -466,7 +518,8 @@ COPILOT_MODEL=claude-sonnet-4 copilot
 
 ## Advanced Usage
 
-> **⚠️ Note**: Advanced features like templates and batch operations are not yet available in the new standalone CLI. These were features of the old `gh copilot` extension.
+> **⚠️ Note**: Advanced features like templates and batch operations are not yet available in the
+> new standalone CLI. These were features of the old `gh copilot` extension.
 
 ### Current Advanced Features
 
@@ -482,7 +535,9 @@ copilot
 ```
 
 ### Future Features
+
 The new CLI is rapidly evolving. Check the [official repository](https://github.com/github/copilot-cli) for updates on:
+
 - Batch operations
 - Custom prompt templates  
 - Advanced configuration options
@@ -496,5 +551,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## More Information
 
 For more information, visit:
+
 - [Official GitHub Copilot CLI Repository](https://github.com/github/copilot-cli)
 - [GitHub Copilot CLI Documentation](https://docs.github.com/copilot/concepts/agents/about-copilot-cli)
+
