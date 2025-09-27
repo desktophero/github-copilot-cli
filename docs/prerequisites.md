@@ -1,20 +1,30 @@
 # System Requirements and Prerequisites
 
+> **⚠️ MAJOR UPDATE**: This guide has been updated for the new standalone GitHub Copilot CLI, not the deprecated `gh copilot` extension.
+
 ## Overview
 
-GitHub Copilot CLI has specific system requirements that must be met before installation. This guide ensures you have the necessary components and versions to avoid common installation issues.
+The new standalone GitHub Copilot CLI has updated system requirements. This guide ensures you have the necessary components for the new `npm install -g @github/copilot` installation method.
+
+**⚠️ Breaking Changes:**
+- GitHub CLI is **no longer required**
+- Node.js 22+ is now **required** (not just recommended)  
+- Installation via npm package, not GitHub CLI extension
+- Different authentication method
 
 ## System Requirements
 
-### Minimum Requirements
+### New Requirements (Standalone CLI)
 
-| Component | Minimum Version | Recommended Version | Notes |
-|-----------|----------------|---------------------|-------|
-| Node.js | 18.x | 22.x or latest LTS | Required for GitHub CLI extensions |
-| npm | 9.x | Latest | Comes with Node.js |
-| GitHub CLI | 2.40.0+ | Latest | Core GitHub CLI tool |
-| Git | 2.30+ | Latest | For repository operations |
-| Operating System | | | See OS-specific requirements below |
+| Component | Minimum Version | Notes |
+|-----------|----------------|-------|
+| **Node.js** | **22.x (REQUIRED)** | Breaking change: 22+ now required |
+| **npm** | **10.x** | Comes with Node.js 22 |
+| **PowerShell (Windows)** | **6+** | PowerShell Core, not Windows PowerShell |
+
+### No Longer Required
+- ❌ **GitHub CLI** - Not needed for standalone CLI
+- ❌ **Git** - Useful but not required for CLI installation
 
 ### Operating System Support
 
@@ -356,13 +366,28 @@ sudo apt update && sudo apt install gh
 
 **Problem**: "HTTP 401: Bad credentials" when installing extension
 
+**This is the most common error when running setup.sh**
+
+**Error message you might see:**
+```
+⚠ GitHub Copilot CLI extension not found. Installing...
+could not check for binary extension: HTTP 401: Bad credentials (https://api.github.com/repos/github/gh-copilot/releases/latest)
+Try authenticating with:  gh auth login
+```
+
 **Solution**:
 ```bash
-# Authenticate with GitHub
+# Authenticate with GitHub FIRST
 gh auth login
 
-# Follow the prompts to authenticate
+# Follow the prompts to authenticate, then re-run setup
+./setup.sh
 ```
+
+**Why this happens:**
+- Installing GitHub CLI extensions requires authenticated access to GitHub's API
+- The setup script tries to install the Copilot extension before checking authentication
+- GitHub returns a 401 error when trying to access extension metadata without authentication
 
 ### Permission Issues
 

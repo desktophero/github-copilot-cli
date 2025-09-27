@@ -1,21 +1,28 @@
 # Quick Start Guide
 
+> **⚠️ MIGRATION NOTICE**: This guide has been updated for the new standalone GitHub Copilot CLI (`copilot`), not the deprecated `gh copilot` extension.
+
 ## Prerequisites Check
 
-**⚠️ Important**: GitHub Copilot CLI requires specific minimum versions. Please verify these first to avoid installation errors:
+**⚠️ Important**: The new GitHub Copilot CLI requires specific minimum versions:
 
 | Component | Minimum | Recommended | Check Command |
 |-----------|---------|-------------|---------------|
-| Node.js | 18.x | **22.x** | `node --version` |
-| GitHub CLI | 2.40.0+ | Latest | `gh --version` |
-| Git | 2.30+ | Latest | `git --version` |
+| Node.js | **22.x** (Required) | **22.x** | `node --version` |
+| npm | **10.x** | Latest | `npm --version` |
+| PowerShell (Windows) | 6+ | Latest | `pwsh --version` |
+
+**Breaking Changes**:
+- GitHub CLI is **no longer required**
+- Node.js 22 is **now required** (not just recommended)
+- Completely new installation method
 
 ### Quick Prerequisites Setup
 
-If you need to update Node.js (most common issue):
+If you need to update Node.js (required):
 
 ```bash
-# Install NVM and Node.js 22
+# Install NVM and Node.js 22 (Required)
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
 source ~/.bashrc  # or ~/.zshrc
 nvm install 22 && nvm use 22 && nvm alias default 22
@@ -26,105 +33,165 @@ node --version  # Should show v22.x.x
 
 ### Prerequisites Verification Script
 
-```bash
-# Download and run verification script
-curl -sSL https://raw.githubusercontent.com/your-username/gh-copilot-cli/main/docs/prerequisites-check.sh | bash
-```
+> **⚠️ Note**: The verification script is being updated for the new CLI. Manual verification recommended for now.
 
-For complete prerequisites guide, see **[System Requirements](docs/prerequisites.md)**.
+```bash
+# Manual verification
+node --version   # Should be 22.x
+npm --version    # Should be 10.x+
+
+# On Windows, also check:
+pwsh --version   # Should be 6.x+
+```
 
 ---
 
-## Automated Setup (Recommended)
+## New Installation Method
 
-Use the provided setup script to configure everything automatically:
+**⚠️ BREAKING CHANGE**: The installation method has completely changed.
+
+### Install the New Standalone CLI
 
 ```bash
-# Download and run setup script
-curl -sSL https://raw.githubusercontent.com/your-username/gh-copilot-cli/main/setup.sh | bash
+# Install globally with npm
+npm install -g @github/copilot
 
-# Or clone and run locally
-git clone https://github.com/your-username/gh-copilot-cli.git
-cd gh-copilot-cli
-./setup.sh
+# Verify installation
+copilot --version
 ```
 
-The script automatically configures:
-- Global instructions for development practices
-- Git commit signing with `-sS` flags  
-- Python development with pipenv and src-layout
-- Conventional commit format
-- Tools and best practices
+### Migration from Old Extension
 
-## Manual Setup
+```bash
+# Remove old extension (if installed)
+gh extension remove github/gh-copilot
+
+# Install new standalone CLI
+npm install -g @github/copilot
+```
+
+### First Launch and Authentication
+
+```bash
+# Launch the new CLI
+copilot
+
+# Authenticate using the /login command
+# In the copilot interface, type:
+/login
+# Follow the OAuth prompts
+```
+
+**Alternative: PAT Authentication**
+```bash
+# Create PAT with "Copilot Requests" permission at:
+# https://github.com/settings/personal-access-tokens/new
+
+# Set environment variable
+export GH_TOKEN="your-pat-here"
+# or
+export GITHUB_TOKEN="your-pat-here"
+
+# Launch copilot
+copilot
+```
 
 ## Essential Commands to Get Started
 
 ### 1. Installation and Setup
 ```bash
-# Install the extension
-gh extension install github/gh-copilot
+# Install the new standalone CLI
+npm install -g @github/copilot
 
-# Authenticate
-gh auth login
+# Launch for first time
+copilot
 
-# Initial configuration
-gh copilot config
+# Authenticate (within copilot interface)
+/login
 ```
 
 ### 2. Basic Usage
 ```bash
-# Start a chat session
-gh copilot chat
+# Launch copilot (from your project directory)
+cd /path/to/your/project
+copilot
 
-# Ask a quick question
-gh copilot ask "What's the difference between malloc and calloc?"
-
-# Generate code
-gh copilot generate --language javascript --task "HTTP request with error handling"
+# Basic interactions (within copilot)
+# Just type natural language:
+# "Help me understand this codebase"
+# "Review my recent changes" 
+# "Create a Python function to parse JSON"
 ```
 
 ### 3. Essential Configuration
 ```bash
-# Set your preferred model
-gh copilot config set model gpt-4
+# Set preferred model (before launching)
+export COPILOT_MODEL=gpt-5
+copilot
 
-# Enable tools for enhanced functionality
-gh copilot config set tools.enabled true
+# Or use default (Claude Sonnet 4)
+copilot
 
-# Check your current settings
-gh copilot config list
+# Launch with banner
+copilot --banner
 ```
 
-### 4. Monitor Usage
+### 4. Working with Different Models
 ```bash
-# Check usage and limits
-gh copilot usage
+# Use default Claude Sonnet 4
+copilot
 
-# View context window information
-gh copilot info context
+# Use GPT-5
+COPILOT_MODEL=gpt-5 copilot
+
+# Set as environment variable
+export COPILOT_MODEL=gpt-5
+copilot
 ```
 
 ### 5. Get Help
 ```bash
 # General help
-gh copilot --help
+copilot --help
 
-# Command-specific help
-gh copilot chat --help
-gh copilot config --help
+# Within copilot interface
+/help      # Show available slash commands
+/feedback  # Submit feedback survey
 ```
 
 ## Your First Session
 
-Try these commands in order:
+Try these steps in order:
 
-1. `gh copilot ask "What are the most important git commands for beginners?"`
-2. `gh copilot generate --language python --task "function to calculate fibonacci sequence"`
-3. `gh copilot usage` (to see your token consumption)
+1. **Install and launch:**
+   ```bash
+   npm install -g @github/copilot
+   copilot
+   ```
+
+2. **Authenticate:**
+   ```bash
+   # Within copilot, run:
+   /login
+   # Follow the OAuth flow
+   ```
+
+3. **Try basic interactions:**
+   - "What are the most important git commands for beginners?"
+   - "Help me create a Python function to read a CSV file"
+   - "Explain the files in this project"
+
+4. **Test different models:**
+   ```bash
+   # Exit copilot (Ctrl+C), then try:
+   COPILOT_MODEL=gpt-5 copilot
+   # Ask the same question to compare responses
+   ```
 
 ## Next Steps
 
-- Read the full [README.md](README.md) for comprehensive documentation
-- Explore [Model Configuration](docs/models.md)
-- Learn about [Tools and Extensions](docs/tools.md)
+- Read the updated [README.md](README.md) for comprehensive documentation  
+- Understand the [new architecture](https://github.com/github/copilot-cli) 
+- Check [official documentation](https://docs.github.com/copilot/concepts/agents/about-copilot-cli)
+
+> **⚠️ Note**: Many advanced features from the old `gh copilot` extension are being reimplemented in the new CLI. Check the official repository for the latest updates.

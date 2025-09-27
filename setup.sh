@@ -1,15 +1,37 @@
 #!/bin/bash
-# GitHub Copilot CLI Global Setup Script
-# This script configures GitHub Copilot CLI with opinionated defaults for:
-# - Git commit signing with -sS flags
-# - Python development with pipenv and src-layout
-# - Conventional commit format
-# - Development best practices
+# GitHub Copilot CLI Legacy Setup Script
+# 
+# ⚠️ DEPRECATION NOTICE: This script is for the OLD gh copilot extension
+# The gh copilot extension has been deprecated and replaced with a standalone CLI.
+# 
+# NEW INSTALLATION:
+#   npm install -g @github/copilot
+#   copilot
+# 
+# This script is kept for reference but will not work with the new CLI.
+# See README.md for updated installation instructions.
 
-set -e
+echo "🚨 DEPRECATION NOTICE"
+echo "===================="
+echo ""
+echo "This setup script is for the OLD 'gh copilot' extension which has been deprecated."
+echo ""
+echo "NEW INSTALLATION METHOD:"
+echo "  npm install -g @github/copilot"
+echo "  copilot"
+echo ""
+echo "Please see the updated README.md for current installation instructions."
+echo ""
+read -p "Do you want to continue with the legacy script anyway? (y/N): " -n 1 -r
+echo ""
+if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+    echo "Installation cancelled. Please use the new installation method."
+    exit 0
+fi
 
-echo "🤖 GitHub Copilot CLI Global Configuration Setup"
-echo "================================================="
+echo ""
+echo "Continuing with legacy script (not recommended)..."
+echo ""
 
 # Colors for output
 RED='\033[0;31m'
@@ -92,21 +114,28 @@ if [[ $(echo "$GH_VERSION >= $REQUIRED_GH_VERSION" | bc -l 2>/dev/null) != "1" ]
 fi
 log_info "GitHub CLI version $GH_VERSION meets requirements"
 
-# Check if gh copilot extension is installed
-if ! gh extension list | grep -q "github/gh-copilot"; then
-    log_warn "GitHub Copilot CLI extension not found. Installing..."
-    gh extension install github/gh-copilot
-    log_info "GitHub Copilot CLI extension installed"
-else
-    log_info "GitHub Copilot CLI extension found"
-fi
-
-# Check authentication
+# Check authentication first (required for extension installation)
 if ! gh auth status &> /dev/null; then
     log_error "Not authenticated with GitHub. Please run: gh auth login"
+    echo "GitHub authentication is required to install the Copilot CLI extension."
+    echo "After authenticating, run this setup script again."
     exit 1
 fi
 log_info "GitHub authentication verified"
+
+# Check if gh copilot extension is installed
+if ! gh extension list | grep -q "github/gh-copilot"; then
+    log_warn "GitHub Copilot CLI extension not found. Installing..."
+    if gh extension install github/gh-copilot; then
+        log_info "GitHub Copilot CLI extension installed"
+    else
+        log_error "Failed to install GitHub Copilot CLI extension"
+        echo "Please check your GitHub authentication and try again: gh auth login"
+        exit 1
+    fi
+else
+    log_info "GitHub Copilot CLI extension found"
+fi
 
 # Create configuration directory
 CONFIG_DIR="$HOME/.config/gh/copilot"

@@ -1,57 +1,52 @@
 # Practical Examples
 
+> **⚠️ MIGRATION NOTICE**: These examples have been updated for the new standalone GitHub Copilot CLI (`copilot`), not the deprecated `gh copilot` extension.
+
 ## Common Development Scenarios
 
 ### 1. Code Review and Analysis
 
+With the new CLI, interactions are conversational within the copilot interface:
+
 ```bash
-# Review a pull request
-gh copilot ask "Review this PR for security issues and best practices" --include-diff
+# Launch copilot in your project directory
+cd /path/to/your/project
+copilot
 
-# Analyze code complexity
-gh copilot ask "How can I simplify this function?" --include src/complex_function.py
-
-# Check for performance issues
-gh copilot ask "Are there any performance bottlenecks in this code?" --include src/api.py
+# Then use natural language prompts:
+# "Review my staged changes for security issues"
+# "Analyze the complexity of the authentication module"
+# "Are there performance bottlenecks in this API?"
 ```
 
 ### 2. Debugging Help
 
 ```bash
-# Debug an error
-gh copilot ask "Why am I getting this error?" --include error.log
+# Launch copilot from your project root
+copilot
 
-# Explain stack trace
-gh copilot ask "Explain this stack trace and suggest fixes" --code "$(cat stack_trace.txt)"
-
-# Debug with context
-gh copilot ask "Help debug this function that's not working correctly" --include src/broken.py --execute
+# Natural language debugging:
+# "I'm getting a TypeError in my Python script, can you help debug it?"
+# "Explain this stack trace: [paste your stack trace]" 
+# "The authentication function isn't working correctly, what could be wrong?"
 ```
 
 ### 3. Code Generation
 
 ```bash
-# Generate API endpoint
-gh copilot generate --language python --task "REST API endpoint for user authentication with JWT"
-
-# Create test cases
-gh copilot ask "Generate unit tests for this class" --include src/user.py --create-file tests/test_user.py
-
-# Generate documentation
-gh copilot ask "Create README documentation for this project" --include-dir src/ --create-file README.md
+# In copilot session:
+# "Create a REST API endpoint for user authentication with JWT"
+# "Generate unit tests for the User class"
+# "Write a Python function to parse CSV files and handle errors"
 ```
 
 ### 4. Learning and Explanation
 
 ```bash
-# Understand complex code
-gh copilot ask "Explain how this algorithm works step by step" --include algorithms/quicksort.py
-
-# Learn new concepts
-gh copilot ask "Explain dependency injection with examples in Python" --execute
-
-# Best practices
-gh copilot ask "What are the best practices for error handling in this code?" --include src/api.py
+# In copilot session:
+# "Explain how the authentication system works in this project"
+# "What are the best practices for error handling in this codebase?"
+# "Teach me about dependency injection with examples"
 ```
 
 ## Configuration Examples
@@ -59,83 +54,79 @@ gh copilot ask "What are the best practices for error handling in this code?" --
 ### Setting Up Your Environment
 
 ```bash
-# Initial setup
-gh extension install github/gh-copilot
-gh auth login
-gh copilot config set model gpt-4
-gh copilot config set tools.enabled true
+# Install the new standalone CLI
+npm install -g @github/copilot
 
-# Create config file
-cat > ~/.config/gh/copilot/config.yml << EOF
-default_model: gpt-4
-tools:
-  enabled: true
-  web_browsing: true
-  code_execution: true
-  file_operations: true
-preferences:
-  verbose: false
-  auto_save_conversations: true
-alerts:
-  daily_tokens: 15000
-  context_usage: 0.8
-EOF
+# Set up authentication (PAT method)
+export GH_TOKEN="ghp_xxxxxxxxxxxxxxxxxxxx"
+
+# Set preferred model
+export COPILOT_MODEL=claude-sonnet-4  # or gpt-5
+
+# Create shell aliases
+echo 'alias cop="copilot"' >> ~/.bashrc
+echo 'alias cop5="COPILOT_MODEL=gpt-5 copilot"' >> ~/.bashrc
 ```
 
 ### Model Switching Workflows
 
 ```bash
-# Start with fast model for exploration
-gh copilot config set model gpt-3.5-turbo
-gh copilot ask "Give me an overview of this codebase" --include-dir src/
+# Start with default model (Claude Sonnet 4)
+copilot
+# Ask: "Give me an overview of this codebase"
 
-# Switch to powerful model for complex analysis
-gh copilot config set model gpt-4
-gh copilot ask "Design a new architecture for better scalability"
+# Exit and switch to GPT-5 for complex analysis
+COPILOT_MODEL=gpt-5 copilot  
+# Ask: "Design a new architecture for better scalability"
 
-# Use extended context for large files
-gh copilot ask "Refactor this entire module" --include large_module.py --model gpt-4-32k
+# Create aliases for easy switching
+alias cop="copilot"
+alias cop5="COPILOT_MODEL=gpt-5 copilot"
 ```
 
 ## Workflow Integration Examples
 
 ### Git Integration
 
+The new CLI automatically detects your git context:
+
 ```bash
-# Generate commit messages
-gh copilot ask "Generate a commit message for these changes:" --include-diff
+# Launch from your project directory
+cd /path/to/your/project
+copilot
 
-# Code review before commit
-gh copilot ask "Review my staged changes" --code "$(git diff --staged)"
-
-# Explain git history
-gh copilot ask "Explain what changed in the last 5 commits" --code "$(git log --oneline -5)"
+# Natural language git workflows:
+# "Generate a commit message for my staged changes"
+# "Review what I've changed since the last commit"
+# "Explain what happened in the last 5 commits"
+# "Help me resolve this merge conflict"
 ```
 
-### CI/CD Integration
+### Project-Based Development
 
 ```bash
-# Analyze test failures
-gh copilot ask "Why are these tests failing?" --include test_output.log
+# Always launch from your project root
+cd /path/to/your/project
+copilot
 
-# Generate GitHub Actions workflow
-gh copilot generate --task "GitHub Actions workflow for Python project with tests and linting" --create-file .github/workflows/ci.yml
-
-# Fix deployment issues
-gh copilot ask "Help fix this deployment error" --include deployment.log --web
+# The CLI automatically understands your project context:
+# "Help me understand how this authentication system works"
+# "Create tests for the payment processing module"
+# "Review my recent changes for security issues"
+# "Help me optimize the database queries in this project"
 ```
 
 ### Documentation Workflows
 
 ```bash
-# Generate API documentation
-gh copilot ask "Create API documentation for these endpoints" --include-dir api/ --create-file docs/api.md
+# In your project directory
+copilot
 
-# Update README
-gh copilot ask "Update the README with new features" --modify README.md --include-dir src/
-
-# Generate changelog
-gh copilot ask "Generate changelog from recent commits" --code "$(git log --since='1 month ago' --pretty=format:'%h %s')"
+# Documentation tasks:
+# "Create API documentation for the user endpoints"
+# "Update the README with the new features I added"
+# "Generate a changelog from my recent commits"
+# "Write installation instructions for this project"
 ```
 
 ## Advanced Use Cases
@@ -143,40 +134,37 @@ gh copilot ask "Generate changelog from recent commits" --code "$(git log --sinc
 ### Architecture Planning
 
 ```bash
-# System design
-gh copilot ask "Design a microservices architecture for an e-commerce platform" --web
+# In your project directory
+copilot
 
-# Database schema
-gh copilot ask "Design database schema for this application" --include requirements.md --execute
-
-# Performance optimization
-gh copilot ask "How can I optimize this system for high load?" --include-dir src/ --web
+# Architecture discussions:
+# "Help me design a microservices architecture for this e-commerce platform"
+# "What database schema would work best for this application?"
+# "How can I optimize this system for high load?"
 ```
 
 ### Security Analysis
 
 ```bash
-# Security audit
-gh copilot ask "Perform security audit on this code" --include-dir src/ --web
+# Security-focused sessions
+copilot
 
-# Check for vulnerabilities
-gh copilot ask "Are there any security vulnerabilities in this authentication system?" --include auth/
-
-# Generate security documentation
-gh copilot ask "Create security guidelines for this project" --create-file SECURITY.md
+# Security queries:
+# "Review this authentication system for security vulnerabilities"
+# "Are there any security issues in my user registration flow?"
+# "Help me create security guidelines for this project"
 ```
 
 ### Code Migration
 
 ```bash
-# Language migration
-gh copilot ask "Convert this Python code to JavaScript" --include old_script.py --create-file new_script.js
+# Migration assistance
+copilot
 
-# Framework migration
-gh copilot ask "Migrate this Flask app to FastAPI" --include app.py
-
-# Database migration
-gh copilot ask "Create migration script from MySQL to PostgreSQL" --include schema.sql
+# Migration tasks:
+# "Help me convert this Python Flask app to FastAPI"
+# "What would this JavaScript code look like in TypeScript?"
+# "Guide me through migrating from MySQL to PostgreSQL"
 ```
 
 ## Team Collaboration Examples
@@ -184,27 +172,25 @@ gh copilot ask "Create migration script from MySQL to PostgreSQL" --include sche
 ### Code Review Workflows
 
 ```bash
-# Prepare for review
-gh copilot ask "Summarize changes in this PR for reviewers" --include-diff
+# Launch copilot in the project with pending changes
+copilot
 
-# Address review comments
-gh copilot ask "Fix the issues mentioned in this review comment" --include review_comment.txt --modify src/file.py
-
-# Review someone else's code
-gh copilot ask "Review this code and suggest improvements" --include colleague_code.py
+# Collaborative review tasks:
+# "Summarize the changes I made for my team"
+# "Review this code and suggest improvements"  
+# "What should I tell reviewers about these changes?"
 ```
 
 ### Knowledge Sharing
 
 ```bash
-# Explain codebase to new team members
-gh copilot ask "Create onboarding documentation for new developers" --include-dir src/ --create-file docs/onboarding.md
+# Knowledge transfer sessions
+copilot
 
-# Document decisions
-gh copilot ask "Document why we chose this architecture" --include architecture.md --create-file docs/decisions.md
-
-# Create tutorials
-gh copilot ask "Create tutorial for this feature" --include feature/ --create-file tutorials/feature_guide.md
+# Knowledge sharing:
+# "Create onboarding documentation for new developers on this project"
+# "Document why we chose this architecture approach"
+# "Create a tutorial for using this authentication system"
 ```
 
 ## Productivity Shortcuts
@@ -214,41 +200,68 @@ gh copilot ask "Create tutorial for this feature" --include feature/ --create-fi
 Add to your `.bashrc` or `.zshrc`:
 
 ```bash
-# Quick aliases
-alias ghc="gh copilot chat"
-alias gha="gh copilot ask"
-alias ghg="gh copilot generate"
-alias ghu="gh copilot usage"
+# Quick aliases for the new CLI
+alias cop="copilot"
+alias cop5="COPILOT_MODEL=gpt-5 copilot"
+alias copb="copilot --banner"
+
+# Set default model
+export COPILOT_MODEL=claude-sonnet-4
+
+# Authentication
+export GH_TOKEN="your-personal-access-token"
 
 # Useful functions
-function ghreview() {
-    gh copilot ask "Review this file: $1" --include "$1"
+function cophelp() {
+    echo "GitHub Copilot CLI Commands:"
+    echo "  cop     - Launch with default model (Claude Sonnet 4)"
+    echo "  cop5    - Launch with GPT-5"
+    echo "  copb    - Launch with banner"
+    echo ""
+    echo "Within copilot:"
+    echo "  /help      - Show available commands"
+    echo "  /login     - Authenticate with GitHub"
+    echo "  /feedback  - Submit feedback"
 }
 
-function ghexplain() {
-    gh copilot ask "Explain this code: $1" --include "$1"
-}
-
-function ghfix() {
-    gh copilot ask "Fix issues in this file: $1" --modify "$1"
-}
-
-function ghdebug() {
-    gh copilot ask "Debug this error: $1" --code "$1" --execute
+function copauth() {
+    echo "Setting up Copilot authentication..."
+    echo "1. Create PAT at: https://github.com/settings/personal-access-tokens/new"
+    echo "2. Add 'Copilot Requests' permission"
+    echo "3. Set: export GH_TOKEN=\"your-pat-here\""
 }
 ```
 
-### IDE Integration
+### Development Integration
 
 ```bash
-# VS Code integration (if using Copilot Chat extension)
-gh copilot ask "Open this in VS Code with explanation" --include src/main.py
+# Project-specific workflows
+function copproject() {
+    cd /path/to/your/project
+    echo "Launching Copilot in project: $(basename $(pwd))"
+    copilot
+}
 
-# Terminal workflow
-gh copilot ask "What should I run next?" --include package.json
+# Model-specific launches
+function copgpt5() {
+    echo "Launching Copilot with GPT-5..."
+    COPILOT_MODEL=gpt-5 copilot
+}
 
-# File watching for continuous help
-watch -n 5 'gh copilot usage --today'
+function copclaude() {
+    echo "Launching Copilot with Claude Sonnet 4..."
+    COPILOT_MODEL=claude-sonnet-4 copilot
+}
+
+# Quick checks
+function copcheck() {
+    echo "Checking Copilot CLI setup..."
+    echo "Node.js: $(node --version)"
+    echo "npm: $(npm --version)"
+    echo "Copilot: $(copilot --version 2>/dev/null || echo 'Not installed')"
+    echo "Auth token: ${GH_TOKEN:+Set} ${GH_TOKEN:-Not set}"
+    echo "Model: ${COPILOT_MODEL:-Default (Claude Sonnet 4)}"
+}
 ```
 
 ## Error Handling Examples
@@ -256,28 +269,42 @@ watch -n 5 'gh copilot usage --today'
 ### Common Issues and Solutions
 
 ```bash
-# When model is unavailable
-gh copilot ask "Same question but simpler" --model gpt-3.5-turbo
+# Installation issues
+npm install -g @github/copilot  # Reinstall if needed
+node --version  # Ensure version 22+
 
-# When context is too large
-gh copilot ask "Summarize the main issues" --include large_file.py
-gh copilot clear
-gh copilot ask "Now help with specific part" --include small_section.py
+# Authentication problems
+export GH_TOKEN="your-pat-here"
+copilot
+# Use /login command for OAuth
 
-# When rate limited
-gh copilot limits
-gh copilot config set model gpt-3.5-turbo  # Switch to faster model
+# Model availability
+COPILOT_MODEL=claude-sonnet-4 copilot  # Try default model
+COPILOT_MODEL=gpt-5 copilot           # Try alternative model
+
+# General troubleshooting session
+copilot
+# Ask: "I'm having trouble with [describe your issue], can you help troubleshoot?"
 ```
 
-### Backup Workflows
+### Migration from Old CLI
 
 ```bash
-# Save important conversations
-gh copilot export conversation --id last --output important_discussion.md
+# Remove old extension
+gh extension remove github/gh-copilot
 
-# Backup configuration
-cp ~/.config/gh/copilot/config.yml ~/backup/copilot-config-$(date +%Y%m%d).yml
+# Clear old configuration (optional)
+rm -rf ~/.config/gh/copilot/
 
-# Restore configuration
-cp ~/backup/copilot-config-20240115.yml ~/.config/gh/copilot/config.yml
+# Install new CLI
+npm install -g @github/copilot
+
+# Set up authentication
+export GH_TOKEN="your-pat-with-copilot-requests-permission"
+
+# Test installation
+copilot --version
+copilot --banner  # First launch with banner
 ```
+
+> **⚠️ Note**: Many advanced features from the old CLI are being reimplemented. Check the [official repository](https://github.com/github/copilot-cli) for the latest feature updates and migration guides.
